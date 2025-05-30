@@ -4,7 +4,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
 
     <div class="card">
-        <h5 class="card-header">Striped rows</h5>
+        <h5 class="card-header">Daftar TPS</h5>
         <div class="table-responsive text-nowrap">
           <table class="table table-striped">
             <thead>

@@ -29,13 +29,21 @@ public function update(Request $request, $id)
     $validated = $request->validate([
         'jumlah_pekerja'   => 'nullable|integer|min:0',
         'luas'             => 'nullable|numeric|min:0',
-        'jam_operasional'  => 'nullable|string|max:255',
+        'jam_buka'         => 'nullable|date_format:H:i',
+        'jam_tutup'        => 'nullable|date_format:H:i|after:jam_buka',
         'kapasitas_tps'    => 'nullable|integer|min:0',
         'fasilitas'        => 'nullable|string',
         'foto_lokasi'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         'ulasan'           => 'nullable|string',
     ]);
 
+    // Gabungkan jam buka dan tutup menjadi satu string
+    $validated['jam_operasional'] = $validated['jam_buka'] && $validated['jam_tutup']
+        ? $validated['jam_buka'] . ' - ' . $validated['jam_tutup']
+        : null;
+
+    // Hapus jam_buka dan jam_tutup agar tidak masuk ke mass assignment
+    unset($validated['jam_buka'], $validated['jam_tutup']);
 
     // Cari TPS berdasarkan ID
     $tps = Tps::findOrFail($id);
@@ -51,6 +59,7 @@ public function update(Request $request, $id)
 
     return redirect()->route('tps.index')->with('success', 'Data TPS berhasil diperbarui.');
 }
+
 
     public function destroy($id)
     {

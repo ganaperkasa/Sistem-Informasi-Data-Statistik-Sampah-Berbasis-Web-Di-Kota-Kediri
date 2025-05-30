@@ -15,6 +15,12 @@
                 <form method="POST" action="{{ route('tps.update', $tps->id) }}" enctype="multipart/form-data">
                   @csrf
                   @method('PUT')
+                  @php
+                  $jam_operasional = $tps->jam_operasional ?? '';
+                  $jam = explode(' - ', $jam_operasional);
+                  $jam_buka = $jam[0] ?? '';
+                  $jam_tutup = $jam[1] ?? '';
+              @endphp
 
                   {{-- Lokasi --}}
                   <div class="row mb-3">
@@ -47,12 +53,17 @@
                   </div>
 
                   {{-- Jam Operasional --}}
-                  <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Jam Operasional</label>
-                    <div class="col-sm-10">
-                      <input type="text" name="jam_operasional" class="form-control" value="{{ $tps->jam_operasional }}">
-                    </div>
-                  </div>
+
+<div class="row mb-3">
+  <label class="col-sm-2 col-form-label">Jam Operasional</label>
+  <div class="col-sm-5">
+    <input type="time" name="jam_buka" class="form-control" value="{{ $jam_buka }}">
+  </div>
+  <div class="col-sm-5">
+    <input type="time" name="jam_tutup" class="form-control" value="{{ $jam_tutup }}">
+  </div>
+</div>
+
 
                   {{-- Kapasitas TPS --}}
                   <div class="row mb-3">
