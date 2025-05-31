@@ -134,7 +134,9 @@
             <div class="layout-page">
                 @include('layouts.navbar')
                 <div class="content-wrapper">
+                    <div class="container-xxl flex-grow-1 container-p-y">
                     @yield('content')
+                    </div>
                     @include('layouts.footer')
                 </div>
             </div>

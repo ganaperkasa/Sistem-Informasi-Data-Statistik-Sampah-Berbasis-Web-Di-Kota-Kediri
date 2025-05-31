@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Peta')
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Data TPS /</span> Daftar TPS</h4>
 
     <div class="card">
         <h5 class="card-header">Daftar TPS</h5>
@@ -50,10 +50,7 @@
       <!--/ Striped Rows -->
 
 
-</div>
 
-@push('js');
 
-@endpush
 
 @endsection

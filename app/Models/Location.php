@@ -13,4 +13,20 @@ class Location extends Model
         'latitude',
         'longitude'
     ];
+
+    public function wasteEntries()
+{
+    return $this->hasMany(WasteEntry::class);
+}
+
+public function wasteOutflows()
+{
+    return $this->hasMany(WasteOutflow::class);
+}
+
+public function reduksiSampah()
+{
+    return $this->hasMany(ReduksiSampah::class);
+}
+
 }
