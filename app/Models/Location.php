@@ -13,6 +13,10 @@ class Location extends Model
         'latitude',
         'longitude'
     ];
+    public function tps()
+    {
+        return $this->hasOne(Tps::class, 'locations_id');
+    }
 
     public function wasteEntries()
 {

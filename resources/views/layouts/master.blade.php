@@ -58,7 +58,7 @@
 
     <!-- Core CSS -->
     <!-- build:css assets/vendor/css/theme.css  -->
-
+    <link rel="stylesheet" href="{{ asset("assets/vendor/libs/pickr/pickr-themes.css") }}" />
     <link rel="stylesheet" href="{{ asset("assets/vendor/css/core.css") }}" />
     <link rel="stylesheet" href="{{ asset("assets/vendor/css/theme-default.css") }}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset("assets/css/demo.css") }}" />
@@ -123,7 +123,7 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-
+    <script src="{{ asset("assets/vendor/js/template-customizer.js") }}"></script>
       <script src="{{ asset("assets/js/config.js")}}"></script>
 
 </head>
@@ -142,6 +142,10 @@
             </div>
         </div>
     </div>
+    <!-- Tambahkan ini di atas script kamu -->
+<script src="https://cdn.jsdelivr.net/npm/formvalidation@1.10.0/dist/js/FormValidation.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/formvalidation@1.10.0/dist/js/plugins/Bootstrap5.min.js"></script>
+
     <script src="{{ asset("assets/vendor/libs/jquery/jquery.js") }}"></script>
 
     <script src="{{ asset("assets/vendor/libs/popper/popper.js") }}"></script>
@@ -151,7 +155,7 @@
 
 
 
-    <script src="../../assets/vendor/libs/pickr/pickr.js"></script>
+    <script src="{{ asset("assets/vendor/libs/pickr/pickr.js") }}"></script>
       <script src="{{ asset("assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js") }}"></script>
 
       <script src="{{ asset("assets/vendor/js/menu.js") }}"></script>
@@ -159,8 +163,8 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="{{ asset("assets/vendor/libs/apex-charts/apexcharts.js") }}"></script>
     <script src="{{ asset("assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js") }}"></script>
+    <script src="{{ asset("assets/vendor/libs/apex-charts/apexcharts.js") }}"></script>
     <!-- Flat Picker -->
 
     <!-- Main JS -->
@@ -170,7 +174,7 @@
 
     <!-- Page JS -->
     <script src="{{ asset("assets/js/dashboards-analytics.js") }}"></script>
-    <script src="{{ asset("assets/js/tables-datatables-basic.js") }}"></script>
+    {{-- <script src="{{ asset("assets/js/tables-datatables-basic.js") }}"></script> --}}
     @stack('js')
 </body>
 

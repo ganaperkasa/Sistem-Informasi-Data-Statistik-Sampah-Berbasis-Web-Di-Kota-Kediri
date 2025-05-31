@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Peta')
+@section('title', 'Tambah Peta')
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
 <div class="row">

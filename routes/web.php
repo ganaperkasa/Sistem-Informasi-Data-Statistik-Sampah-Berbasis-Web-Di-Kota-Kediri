@@ -24,8 +24,15 @@ use App\Http\Controllers\CobaController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('coba.coba');
+// });
 Route::get('/', function () {
-    return view('coba.coba');
+    return view('landingpage');
+});
+
+Route::get('/login', function () {
+    return view('login.login');
 });
 
 Route::get('/dashboard', function () {

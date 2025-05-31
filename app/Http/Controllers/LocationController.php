@@ -34,7 +34,9 @@ class LocationController extends Controller
 
     public function index()
 {
-    $locations = Location::all();
+    $locations = Location::with('tps')->get();
+
+
     return view('peta.show', compact('locations'));
 }
 }

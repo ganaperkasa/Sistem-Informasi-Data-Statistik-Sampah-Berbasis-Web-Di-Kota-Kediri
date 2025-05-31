@@ -19,13 +19,12 @@
 
     </div>
     @push('js')
-        ;
 
         <script>
             // Inisialisasi peta
-            var map = L.map('map').setView([-7.8211583, 112.0089698], 11);
+            var map = L.map('map').setView([-7.8267704, 112.0197845], 13);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
+                maxZoom: 26,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
 
@@ -52,6 +51,14 @@
             Latitude: {{ $location->latitude }}<br>
             Longitude: {{ $location->longitude }}
           </div>
+          <div class="text-muted small">
+            @if($location->tps && $location->tps->foto_lokasi)
+                <img src="{{ asset('storage/' . $location->tps->foto_lokasi) }}" class="img-thumbnail" style="width: 80px; height: auto;">
+            @else
+                <span>Tidak ada foto</span>
+            @endif
+          </div>
+
           <div class="mt-1 small">
             <i class="bx bx-calendar"></i> {{ $location->created_at->format('d M Y') }}
           </div>
@@ -61,7 +68,7 @@
 
             // Jika ada lokasi, set view ke lokasi pertama
             @if ($locations->isNotEmpty())
-                map.setView([{{ $locations[0]->latitude }}, {{ $locations[0]->longitude }}], 14);
+                map.setView([{{ $locations[0]->latitude }}, {{ $locations[0]->longitude }}], 13);
             @endif
         </script>
     @endpush

@@ -143,6 +143,12 @@
           <div data-i18n="Analytics">Lihat TPS</div>
         </a>
       </li> --}}
+
+
+
+      <!-- Components -->
+      <li class="menu-header small text-uppercase"><span class="menu-header-text">User</span></li>
+      <!-- Cards -->
       <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -165,17 +171,6 @@
             </a>
           </li>
         </ul>
-      </li>
-
-
-      <!-- Components -->
-      <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
-      <!-- Cards -->
-      <li class="menu-item">
-        <a href="cards-basic.html" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-collection"></i>
-          <div data-i18n="Basic">Cards</div>
-        </a>
       </li>
       <!-- User interface -->
 

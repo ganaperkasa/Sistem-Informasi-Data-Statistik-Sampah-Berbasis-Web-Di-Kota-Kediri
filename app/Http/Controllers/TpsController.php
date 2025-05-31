@@ -12,7 +12,7 @@ class TpsController extends Controller
     public function index()
     {
         // Mengambil semua data TPS dari model Tps
-        $tps = Tps::all();
+        $tps = Tps::with('location')->paginate(5);
 
         // Mengembalikan view dengan data TPS
         return view('tps.index', compact('tps'));
