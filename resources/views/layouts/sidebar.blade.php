@@ -87,10 +87,28 @@
           <div data-i18n="Analytics">Data TPS</div>
         </a>
       </li>
+      <li class="menu-item {{ Request::is('waste-entries*') || Request::is('waste-outflows*') ? 'active open' : '' }}">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-dock-top"></i>
+          <div data-i18n="Account Settings">Pengelolaan Sampah</div>
+        </a>
+        <ul class="menu-sub">
+          <li class="menu-item {{ Request::is('waste-entries') ? 'active' : '' }}">
+            <a href="/waste-entries" class="menu-link">
+              <div data-i18n="Account">Sampah Masuk</div>
+            </a>
+          </li>
+          <li class="menu-item {{ Request::is('waste-outflows') ? 'active' : '' }}">
+            <a href="/waste-outflows" class="menu-link">
+              <div data-i18n="Notifications">Sampah Keluar</div>
+            </a>
+          </li>
+        </ul>
+      </li>
       <li class="menu-item {{ \Request::is('reduksi-sampah*') ? 'active' : '' }}">
         <a href="{{ url('/reduksi-sampah') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
-          <div data-i18n="Analytics">Data Reduksi Sampah</div>
+          <div data-i18n="Analytics">Reduksi Sampah</div>
         </a>
       </li>
 

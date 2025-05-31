@@ -48,9 +48,11 @@ Route::get('/reduksi-sampah', [ReduksiSampahController::class, 'index'])->name('
 Route::get('/reduksi-sampah/create', [ReduksiSampahController::class, 'create'])->name('reduksi_sampah.create');
 Route::post('/reduksi-sampah/hitung', [ReduksiSampahController::class, 'hitungDanSimpan'])->name('reduksi_sampah.calculate');
 
+Route::get('/waste-entries', [WasteEntryController::class, 'index'])->name('waste_entries.index');
 Route::get('/waste-entries/create', [WasteEntryController::class, 'create'])->name('waste_entries.create');
 Route::post('/waste-entries', [WasteEntryController::class, 'store'])->name('waste_entries.store');
 
+Route::get('/waste-outflows', [WasteOutflowController::class, 'index'])->name('waste_outflows.index');
 Route::get('/waste-outflows/create', [WasteOutflowController::class, 'create'])->name('waste_outflows.create');
 Route::post('/waste-outflows', [WasteOutflowController::class, 'store'])->name('waste_outflows.store');
 

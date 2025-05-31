@@ -47,15 +47,8 @@ class ReduksiSampahController extends Controller
             ]
         );
 
-        return response()->json([
-            'message' => 'Data reduksi sampah berhasil disimpan.',
-            'data' => [
-                'sampah_masuk' => $masuk,
-                'sampah_keluar' => $keluar,
-                'reduksi_kg' => $reduksi,
-                'persentase_reduksi' => round($persentase, 2),
-            ]
-        ]);
+        return redirect()->route('reduksi_sampah.index')->with('success', 'Data reduksi sampah berhasil disimpan.');
+
     }
 }
 

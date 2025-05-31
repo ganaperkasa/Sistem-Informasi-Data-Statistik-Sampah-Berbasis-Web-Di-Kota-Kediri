@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class WasteOutflowController extends Controller
 {
+    public function index()
+{
+    $sampahKeluar = WasteOutflow::with('location')->get();
+    return view('sampah-keluar.index', compact('sampahKeluar'));
+}
     public function create()
     {
         $locations = Location::all();
@@ -24,6 +29,6 @@ class WasteOutflowController extends Controller
 
         WasteOutflow::create($request->only(['location_id', 'outflow_date', 'amount_kg']));
 
-        return redirect()->back()->with('success', 'Data sampah keluar berhasil disimpan.');
+        return redirect()->route('waste_outflows.index')->with('success', 'Data sampah keluar berhasil disimpan.');
     }
 }
