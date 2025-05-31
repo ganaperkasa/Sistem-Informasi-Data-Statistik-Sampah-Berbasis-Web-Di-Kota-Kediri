@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Peta')
 @section('content')
-    <div class="container-xxl flex-grow-1 container-p-y">
+
         <div class="row">
             <div class="col-md-12 col-lg-12 order-0 mb-4">
                 <div class="card h-1000">
@@ -16,14 +16,14 @@
                 </div>
             </div>
 
-        </div>
+
     </div>
     @push('js')
         ;
 
         <script>
             // Inisialisasi peta
-            var map = L.map('map').setView([-7.8211583, 112.0089698], 14);
+            var map = L.map('map').setView([-7.8211583, 112.0089698], 11);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'

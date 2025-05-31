@@ -31,7 +31,11 @@
                     <td>{{ $tp->jam_operasional }}</td>
                     <td>{{ $tp->kapasitas_tps }}</td>
                     <td>{{ $tp->fasilitas }}</td>
-                    <td>{{ $tp->foto }}</td>
+                    <td>@if($tp->foto_lokasi)
+                        <img src="{{ asset('storage/' . $tp->foto_lokasi) }}" class="img-thumbnail" style="width: 80px; height: auto;">
+                    @else
+                        Tidak ada foto
+                    @endif</td>
 
                     <td>
                         <a href="{{ route('tps.edit', $tp->id) }}" class="btn btn-outline-primary">Edit</a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Location; // Pastikan model Location sudah dibuat
 use App\Models\Tps; // Pastikan model Tps sudah dibuat
+use Illuminate\Support\Str;
 
 class TpsController extends Controller
 {
@@ -49,10 +50,15 @@ public function update(Request $request, $id)
     $tps = Tps::findOrFail($id);
 
     // Jika ada file gambar, simpan dan update path-nya
-    if ($request->hasFile('foto_lokasi')) {
-        $fotoPath = $request->file('foto_lokasi')->store('tps_images', 'public');
-        $validated['foto_lokasi'] = $fotoPath;
-    }
+
+
+if ($request->hasFile('foto_lokasi')) {
+    $file = $request->file('foto_lokasi');
+    $filename = time() . '_' . $file->getClientOriginalName();
+    $fotoPath = $file->storeAs('tps_images', $filename, 'public');
+    $validated['foto_lokasi'] = $fotoPath;
+}
+
 
     // Update data TPS
     $tps->update($validated);
