@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIPSN - Komposisi Sampah</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset("assets/img/daur.png") }}" />
+    <title>DLHKP - Kota Kediri</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
         * {
@@ -329,7 +330,7 @@
 
         .facility-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 20px;
             margin: 20px 0;
         }
@@ -430,6 +431,8 @@
             position: relative;
             height: 400px;
             background: white;
+            justify-content: center;
+        align-items: center;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 10px rgba(46, 125, 50, 0.1);
@@ -551,11 +554,11 @@
 
                 </div>
                 <div class="nav-links">
-                    <a href="#beranda" class="nav-link" data-page="beranda">Beranda</a>
-                    <a href="#data-sampah" class="nav-link " data-page="data-sampah">Data Sampah</a>
-                    <a href="#regulasi" class="nav-link" data-page="regulasi">Regulasi</a>
-                    <a href="#fasilitas" class="nav-link" data-page="fasilitas">Fasilitas</a>
-                    <a href="#kontak" class="nav-link" data-page="kontak">Kontak</a>
+                    <a href="#" class="nav-link active" data-page="beranda">Beranda</a>
+                    <a href="#" class="nav-link" data-page="data-sampah">Data Sampah</a>
+                    <a href="#" class="nav-link" data-page="regulasi">Regulasi</a>
+                    <a href="#" class="nav-link" data-page="fasilitas">Fasilitas</a>
+                    <a href="#" class="nav-link" data-page="kontak">Kontak</a>
                     <a href="{{ url('/login') }}" class="nav-link">Login</a>
                 </div>
             </nav>
@@ -563,7 +566,7 @@
 
         <main class="main-content">
             <!-- Halaman Beranda -->
-            <div id="beranda" class="page-content">
+            <div id="beranda" class="page-content active">
                 <div class="hero-section">
                     <h1 class="hero-title">Selamat Datang</h1>
                     <p class="hero-subtitle">Sistem Informasi Pengelolaan Sampah Kota Kediri</p>
@@ -595,33 +598,27 @@
             </div>
 
             <!-- Halaman Data Sampah -->
-            <div id="data-sampah" class="page-content active">
-                <h1 class="page-title">Komposisi Sampah</h1>
+            <div id="data-sampah" class="page-content">
+                <h1 class="page-title">Reduksi Sampah</h1>
 
                 <div class="controls">
                     <div class="control-group">
                         <label class="control-label">Tahun</label>
-                        <select class="control-select" id="yearSelect">
-                            <option value="2024">2024</option>
-                            <option value="2023">2023</option>
-                            <option value="2022">2022</option>
+                        <select class="control-select" id="yearSelect" onchange="applyFilters()">
+                            <option value="2025" {{ $tahun == 2025 ? 'selected' : '' }}>2025</option>
+                            <option value="2024" {{ $tahun == 2024 ? 'selected' : '' }}>2024</option>
+                            <option value="2023" {{ $tahun == 2023 ? 'selected' : '' }}>2023</option>
                         </select>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Provinsi</label>
-                        <select class="control-select" id="provinceSelect">
-                            <option value="jawa-timur">Jawa Timur</option>
-                            <option value="jakarta">DKI Jakarta</option>
-                            <option value="jawa-barat">Jawa Barat</option>
-                        </select>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Kabupaten/Kota</label>
-                        <select class="control-select" id="citySelect">
-                            <option value="">Pilih Kota</option>
-                            <option value="surabaya">Surabaya</option>
-                            <option value="malang">Malang</option>
-                            <option value="kediri">Kediri</option>
+                        <label class="control-label">TPS</label>
+                        <select class="control-select" id="tpsSelect" onchange="applyFilters()">
+                            <option value="">Semua TPS</option>
+                            @foreach ($locations as $location)
+                                <option value="{{ $location->name }}" {{ $tps == $location->name ? 'selected' : '' }}>
+                                    {{ $location->name }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -632,10 +629,16 @@
                 </div>
 
                 <div class="chart-section">
-                    <h2 class="chart-title">Komposisi Sampah Berdasarkan Jenis</h2>
+                    <h2 class="chart-title">Reduksi Sampah Berdasarkan TPS</h2>
 
+                    {{-- <div class="chart-container">
+                        <canvas id="wasteChart"></canvas>
+                    </div> --}}
                     <div class="chart-container">
                         <canvas id="wasteChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+
                     </div>
 
                     <div class="legend" id="chartLegend"></div>
@@ -709,43 +712,27 @@
                 <div class="content-section">
                     <h2 class="section-title">Jenis Fasilitas</h2>
                     <div class="facility-grid">
-                        <div class="facility-card">
-                            <h3 class="facility-name">TPA Regional Surabaya</h3>
-                            <span class="facility-type">Tempat Pemrosesan Akhir</span>
-                            <div class="facility-info">
-                                <p><strong>Lokasi:</strong> Benowo, Surabaya</p>
-                                <p><strong>Kapasitas:</strong> 1,500 ton/hari</p>
-                                <p><strong>Status:</strong> Operasional</p>
+                        @foreach ($locations as $location)
+                            <div class="facility-card">
+                                <h3 class="facility-name">{{ $location->name }}</h3>
+                                <span class="facility-type">Tempat Pengumpulan Sampah</span>
+                                <div class="facility-info">
+                                    <p><strong>Jam Operasional:</strong> {{ $location->jam_operasional }}</p>
+                                    <p><strong>Kapasitas:</strong> {{ $location->kapasitas_tps }} ton/hari</p>
+                                    <p><strong>Fasilitas:</strong> {{ $location->fasilitas }}</p>
+                                    <p><strong>Foto Lokasi:</strong> </p>
+                                </div>
+
+                                @if($location->foto_lokasi)
+                                    <div class="facility-image">
+                                        <img src="{{ asset('storage/' . $location->foto_lokasi) }}" alt="Foto TPS" style="width:80%; height:auto;">
+                                    </div>
+                                @endif
                             </div>
-                        </div>
-                        <div class="facility-card">
-                            <h3 class="facility-name">Bank Sampah Malang Raya</h3>
-                            <span class="facility-type">Bank Sampah</span>
-                            <div class="facility-info">
-                                <p><strong>Lokasi:</strong> Kota Malang</p>
-                                <p><strong>Jenis Layanan:</strong> Pengumpulan & Pemilahan</p>
-                                <p><strong>Nasabah:</strong> 2,500+ rumah tangga</p>
-                            </div>
-                        </div>
-                        <div class="facility-card">
-                            <h3 class="facility-name">TPST Kediri</h3>
-                            <span class="facility-type">Tempat Pengolahan Sampah Terpadu</span>
-                            <div class="facility-info">
-                                <p><strong>Lokasi:</strong> Kediri</p>
-                                <p><strong>Teknologi:</strong> Composting & RDF</p>
-                                <p><strong>Kapasitas:</strong> 200 ton/hari</p>
-                            </div>
-                        </div>
-                        <div class="facility-card">
-                            <h3 class="facility-name">MRF Jakarta Utara</h3>
-                            <span class="facility-type">Material Recovery Facility</span>
-                            <div class="facility-info">
-                                <p><strong>Lokasi:</strong> Jakarta Utara</p>
-                                <p><strong>Fokus:</strong> Pemilahan Sampah Daur Ulang</p>
-                                <p><strong>Kapasitas:</strong> 300 ton/hari</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
+
+
                 </div>
 
                 <div class="content-section">
@@ -829,169 +816,262 @@
         </main>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
-        // Data sampah dengan warna hijau yang beragam
-        const wasteData = {
-            labels: ['Sisa Makanan', 'Kayu/Ranting', 'Kertas/Karton', 'Plastik', 'Logam', 'Kain', 'Karet/Kulit', 'Kaca', 'Lainnya'],
-            data: [45.27, 12.53, 10.65, 17.38, 1.92, 2.36, 1.52, 1.73, 6.64],
-            colors: [
-                '#2e7d32', // Dark green
-                '#388e3c', // Medium dark green
-                '#43a047', // Medium green
-                '#4caf50', // Main green
-                '#66bb6a', // Light green
-                '#81c784', // Lighter green
-                '#a5d6a7', // Very light green
-                '#c8e6c9', // Pale green
-                '#e8f5e8'  // Very pale green
-            ]
-        };
+        // Data dan variabel global
+const labels = @json($reduksiData->pluck('name'));
+const values = @json($reduksiData->pluck('reduksi_kg'));
+const colors = generateGreenColors(labels.length);
 
-        let chart;
+let chart; // Variabel global untuk chart
 
-        function initChart() {
-            const ctx = document.getElementById('wasteChart').getContext('2d');
-
-            chart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: wasteData.labels,
-                    datasets: [{
-                        data: wasteData.data,
-                        backgroundColor: wasteData.colors,
-                        borderWidth: 2,
-                        borderColor: '#ffffff',
-                        hoverBorderWidth: 3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(46, 125, 50, 0.9)',
-                            titleColor: '#ffffff',
-                            bodyColor: '#ffffff',
-                            borderColor: '#4caf50',
-                            borderWidth: 1,
-                            cornerRadius: 6,
-                            callbacks: {
-                                label: function(context) {
-                                    return context.label + ': ' + context.parsed + '%';
-                                }
+// Inisialisasi chart
+function initChart() {
+    const ctx = document.getElementById('wasteChart');
+    if (ctx) {
+        chart = new Chart(ctx.getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: colors,
+                    borderWidth: 2,
+                    borderColor: '#fff',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw + ' kg';
                             }
                         }
-                    },
-                    cutout: '50%',
-                    animation: {
-                        duration: 1500,
-                        easing: 'easeOutQuart'
+                    }
+                },
+                elements: {
+                    arc: {
+                        cutout: '50%'
                     }
                 }
-            });
-        }
-
-        function updateLegend() {
-            const legendContainer = document.getElementById('chartLegend');
-            legendContainer.innerHTML = '';
-
-            wasteData.labels.forEach((label, index) => {
-                const legendItem = document.createElement('div');
-                legendItem.className = 'legend-item';
-                legendItem.innerHTML = `
-                    <div class="legend-color" style="background-color: ${wasteData.colors[index]}"></div>
-                    <span class="legend-text">${label}: ${wasteData.data[index]}%</span>
-                `;
-                legendContainer.appendChild(legendItem);
-            });
-        }
-
-        function updateStats() {
-            const organicWaste = wasteData.data[0] + wasteData.data[1];
-            document.getElementById('organicWaste').textContent = organicWaste.toFixed(1) + '%';
-            document.getElementById('plasticWaste').textContent = wasteData.data[3] + '%';
-            document.getElementById('paperWaste').textContent = wasteData.data[2] + '%';
-        }
-
-        function showLoading() {
-            document.getElementById('loading').style.display = 'block';
-            document.querySelector('.chart-section').style.opacity = '0.5';
-        }
-
-        function hideLoading() {
-            document.getElementById('loading').style.display = 'none';
-            document.querySelector('.chart-section').style.opacity = '1';
-        }
-
-        function updateData() {
-            showLoading();
-
-            setTimeout(() => {
-                chart.update('active');
-                updateLegend();
-                updateStats();
-                hideLoading();
-            }, 800);
-        }
-
-        // Event listeners
-        document.getElementById('yearSelect').addEventListener('change', updateData);
-        document.getElementById('provinceSelect').addEventListener('change', updateData);
-        document.getElementById('citySelect').addEventListener('change', updateData);
-
-        // Navigation functionality
-        document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-        // Abaikan link tanpa atribut data-page (seperti login)
-        if (!this.hasAttribute('data-page')) {
-            return;
-        }
-
-        e.preventDefault(); // Mencegah perilaku default hanya untuk navigasi internal
-
-        // Navigasi antar halaman
-        const page = this.getAttribute('data-page');
-        document.querySelectorAll('.page-content').forEach(content => {
-            content.classList.remove('active');
-        });
-        document.getElementById(page).classList.add('active');
-    });
-});
-
-        // Contact form functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-
-                    // Get form data
-                    const formData = {
-                        name: document.getElementById('fullName').value,
-                        email: document.getElementById('email').value,
-                        organization: document.getElementById('organization').value,
-                        subject: document.getElementById('subject').value,
-                        message: document.getElementById('message').value
-                    };
-
-                    // Simulate form submission
-                    alert('Terima kasih! Pesan Anda telah dikirim. Tim kami akan segera menghubungi Anda.');
-
-                    // Reset form
-                    contactForm.reset();
-                });
             }
         });
+    }
+}
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
+// Generate warna hijau
+function generateGreenColors(count) {
+    const colors = [];
+    for (let i = 0; i < count; i++) {
+        const hue = Math.floor(Math.random() * 60) + 90;
+        const saturation = Math.floor(Math.random() * 30) + 60;
+        const lightness = Math.floor(Math.random() * 20) + 40;
+        colors.push(`hsl(${hue}, ${saturation}%, ${lightness}%)`);
+    }
+    return colors;
+}
+
+// Update legend
+function updateLegend() {
+    const legendContainer = document.getElementById('chartLegend');
+    if (legendContainer && labels && values) {
+        legendContainer.innerHTML = '';
+        labels.forEach((label, index) => {
+            const legendItem = document.createElement('div');
+            legendItem.className = 'legend-item';
+            legendItem.innerHTML = `
+                <div class="legend-color" style="background-color: ${colors[index]}"></div>
+                <span class="legend-label">${label}: ${values[index]} kg</span>
+            `;
+            legendContainer.appendChild(legendItem);
+        });
+    }
+}
+
+// Filter data
+function applyFilters() {
+    const year = document.getElementById('yearSelect').value;
+    const tps = document.getElementById('tpsSelect').value;
+    let url = `?tahun=${year}`;
+    if (tps !== '') {
+        url += `&tps=${encodeURIComponent(tps)}`;
+    }
+    // Tambahkan parameter page untuk mempertahankan halaman yang aktif
+    url += `&page=data-sampah`;
+    window.location.href = url;
+}
+
+// Update statistik
+function updateStats() {
+    // Hitung total dari data yang ada
+    const total = values.reduce((sum, val) => sum + parseFloat(val), 0);
+
+    // Update total waste
+    const totalWasteElement = document.getElementById('totalWaste');
+    if (totalWasteElement) {
+        totalWasteElement.textContent = total.toFixed(1) + ' kg';
+    }
+
+    // Untuk statistik lainnya, kita bisa menghitung persentase
+    // atau menggunakan data statis jika tidak ada data spesifik
+    const organicWasteElement = document.getElementById('organicWaste');
+    const plasticWasteElement = document.getElementById('plasticWaste');
+    const paperWasteElement = document.getElementById('paperWaste');
+
+    if (organicWasteElement) organicWasteElement.textContent = '57.8%';
+    if (plasticWasteElement) plasticWasteElement.textContent = '17.4%';
+    if (paperWasteElement) paperWasteElement.textContent = '10.7%';
+}
+
+// Loading functions
+function showLoading() {
+    const loadingElement = document.getElementById('loading');
+    const chartSection = document.querySelector('.chart-section');
+    if (loadingElement) loadingElement.style.display = 'block';
+    if (chartSection) chartSection.style.opacity = '0.5';
+}
+
+function hideLoading() {
+    const loadingElement = document.getElementById('loading');
+    const chartSection = document.querySelector('.chart-section');
+    if (loadingElement) loadingElement.style.display = 'none';
+    if (chartSection) chartSection.style.opacity = '1';
+}
+
+function updateData() {
+    showLoading();
+    setTimeout(() => {
+        if (chart) {
+            chart.update('active');
+        }
+        updateLegend();
+        updateStats();
+        hideLoading();
+    }, 800);
+}
+
+// Fungsi untuk mengupdate URL
+function updateUrl(pageId) {
+    const url = new URL(window.location);
+
+    if (pageId === 'beranda') {
+        // Untuk halaman beranda, hapus semua parameter
+        url.search = '';
+    } else {
+        // Untuk halaman lain, set parameter page
+        url.searchParams.set('page', pageId);
+
+        // Hapus parameter yang tidak relevan untuk halaman selain data-sampah
+        if (pageId !== 'data-sampah') {
+            url.searchParams.delete('tahun');
+            url.searchParams.delete('tps');
+        }
+    }
+
+    // Update URL tanpa reload halaman
+    window.history.pushState({}, '', url);
+}
+
+// Fungsi untuk mendapatkan parameter URL
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+// Inisialisasi halaman dan navigasi
+document.addEventListener('DOMContentLoaded', function() {
+    // Fungsi untuk menampilkan halaman tertentu
+    function showPage(pageId) {
+        // Sembunyikan semua halaman
+        document.querySelectorAll('.page-content').forEach(page => {
+            page.classList.remove('active');
+        });
+
+        // Tampilkan halaman yang dipilih
+        const targetPage = document.getElementById(pageId);
+        if (targetPage) {
+            targetPage.classList.add('active');
+        }
+
+        // Update status aktif di navbar
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('data-page') === pageId) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    // Event listener untuk navigasi
+    document.querySelectorAll('.nav-link[data-page]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Abaikan link login
+            if(this.getAttribute('href') !== '{{ url("/login") }}') {
+                e.preventDefault();
+                const page = this.getAttribute('data-page');
+                showPage(page);
+                updateUrl(page);
+            }
+        });
+    });
+
+    // Cek apakah ada parameter page dari URL
+    const pageParam = getUrlParameter('page');
+    let initialPage = 'beranda'; // default page
+
+    // Jika ada parameter page, gunakan itu
+    if (pageParam && pageParam !== '') {
+        initialPage = pageParam;
+    }
+
+    // Inisialisasi halaman
+    showPage(initialPage);
+
+    // Inisialisasi chart hanya jika berada di halaman data-sampah
+    if (initialPage === 'data-sampah' || document.getElementById('wasteChart')) {
+        setTimeout(() => {
             initChart();
             updateLegend();
             updateStats();
+        }, 100);
+    }
+});
+
+// Contact form functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = {
+                name: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                organization: document.getElementById('organization').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            // Simulate form submission
+            alert('Terima kasih! Pesan Anda telah dikirim. Tim kami akan segera menghubungi Anda.');
+
+            // Reset form
+            contactForm.reset();
         });
-    </script>
+    }
+});
+        </script>
+
+
 </body>
 </html>
