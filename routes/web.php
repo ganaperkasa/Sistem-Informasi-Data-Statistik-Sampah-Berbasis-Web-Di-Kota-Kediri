@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\TpsController;
 use App\Models\Tps;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ReduksiSampahController;
 use App\Http\Controllers\WasteEntryController;
 use App\Http\Controllers\WasteOutflowController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
@@ -24,20 +26,30 @@ use App\Http\Controllers\CobaController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('coba.coba');
-// });
 Route::get('/', function () {
     return view('landingpage');
 });
 
-Route::get('/login', function () {
-    return view('login.login');
+Route::get('/', [LandingpageController::class, 'index'])->name('landingpage');
+
+
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard', fn() => view('coba.dashboard'));
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::get('/login', function () {
+//     return view('login.login');
+// });
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/maps', [PetaController::class, 'index'])->name('maps.index');
 Route::get('/maps-tps', [LocationController::class, 'index'])->name('maps.index');

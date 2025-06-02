@@ -548,7 +548,7 @@
             <nav class="nav">
                 <div class="logo">
                     <img src="{{ asset('assets/img/logo.png') }}" class="logo-icon" alt="Logo SIPSN">
-                    
+
                 </div>
                 <div class="nav-links">
                     <a href="#beranda" class="nav-link" data-page="beranda">Beranda</a>
@@ -565,9 +565,9 @@
             <!-- Halaman Beranda -->
             <div id="beranda" class="page-content">
                 <div class="hero-section">
-                    <h1 class="hero-title">Selamat Datang di SIPSN</h1>
-                    <p class="hero-subtitle">Sistem Informasi Pengelolaan Sampah Nasional</p>
-                    <p class="hero-description">Platform terintegrasi untuk monitoring dan pengelolaan data sampah di seluruh Indonesia. Berkomitmen untuk Indonesia yang lebih bersih dan berkelanjutan melalui pengelolaan sampah yang efektif.</p>
+                    <h1 class="hero-title">Selamat Datang</h1>
+                    <p class="hero-subtitle">Sistem Informasi Pengelolaan Sampah Kota Kediri</p>
+                    <p class="hero-description">Platform terintegrasi untuk monitoring dan pengelolaan data sampah di seluruh kota kediri. Berkomitmen untuk Indonesia yang lebih bersih dan berkelanjutan melalui pengelolaan sampah yang efektif.</p>
                 </div>
 
                 <div class="features-grid">
@@ -664,7 +664,7 @@
             <!-- Halaman Regulasi -->
             <div id="regulasi" class="page-content">
                 <h1 class="page-title">Regulasi Pengelolaan Sampah</h1>
-                
+
                 <div class="content-section">
                     <h2 class="section-title">Peraturan Nasional</h2>
                     <ul class="regulation-list">
@@ -705,7 +705,7 @@
             <!-- Halaman Fasilitas -->
             <div id="fasilitas" class="page-content">
                 <h1 class="page-title">Fasilitas Pengelolaan Sampah</h1>
-                
+
                 <div class="content-section">
                     <h2 class="section-title">Jenis Fasilitas</h2>
                     <div class="facility-grid">
@@ -774,7 +774,7 @@
             <!-- Halaman Kontak -->
             <div id="kontak" class="page-content">
                 <h1 class="page-title">Hubungi Kami</h1>
-                
+
                 <div class="content-section">
                     <h2 class="section-title">Informasi Kontak</h2>
                     <div class="info-grid">
@@ -928,7 +928,7 @@
 
         function updateData() {
             showLoading();
-            
+
             setTimeout(() => {
                 chart.update('active');
                 updateLegend();
@@ -967,7 +967,7 @@
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
+
                     // Get form data
                     const formData = {
                         name: document.getElementById('fullName').value,
@@ -976,10 +976,10 @@
                         subject: document.getElementById('subject').value,
                         message: document.getElementById('message').value
                     };
-                    
+
                     // Simulate form submission
                     alert('Terima kasih! Pesan Anda telah dikirim. Tim kami akan segera menghubungi Anda.');
-                    
+
                     // Reset form
                     contactForm.reset();
                 });

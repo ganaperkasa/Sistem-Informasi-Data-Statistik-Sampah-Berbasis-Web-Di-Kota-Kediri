@@ -30,7 +30,7 @@
             left: 0;
             width: 200%;
             height: 200%;
-            background: 
+            background:
                 radial-gradient(circle at 20% 50%, rgba(45, 143, 111, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(26, 122, 94, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 40% 80%, rgba(15, 76, 58, 0.3) 0%, transparent 50%);
@@ -48,7 +48,7 @@
             backdrop-filter: blur(20px);
             border-radius: 24px;
             padding: 3rem 2.5rem;
-            box-shadow: 
+            box-shadow:
                 0 25px 50px rgba(0, 0, 0, 0.2),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
             width: 100%;
@@ -279,7 +279,7 @@
                 margin: 1rem;
                 padding: 2rem 1.5rem;
             }
-            
+
             .welcome-text {
                 font-size: 1.5rem;
             }
@@ -294,29 +294,29 @@
             <p class="subtitle">Masuk ke akun Anda untuk melanjutkan</p>
         </div>
 
-        <form id="loginForm">
+        <form method="POST" action="{{ url('/login') }}">
+            @csrf
             <div class="form-group">
                 <div class="input-wrapper">
-                    <input type="email" class="form-input" placeholder="Masukkan email Anda" required>
-                    
+                    <input type="email" name="email" class="form-input" placeholder="Masukkan email Anda" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="input-wrapper">
-                    <input type="password" class="form-input" placeholder="Masukkan password Anda" required>
-                    
+                    <input type="password" name="password" class="form-input" placeholder="Masukkan password Anda" required>
                 </div>
             </div>
 
-            <div class="forgot-password">
-                <a href="#" onclick="showAlert('Fitur lupa password')">Lupa password?</a>
-            </div>
+            @if ($errors->any())
+                <div style="color:red; margin-bottom: 1rem;">
+                    <strong>{{ $errors->first() }}</strong>
+                </div>
+            @endif
 
-            <button type="submit" class="login-btn">
-                Masuk Sekarang
-            </button>
+            <button type="submit" class="login-btn">Masuk Sekarang</button>
         </form>
+
 
         <div class="divider">
             <span>atau</span>
@@ -330,10 +330,10 @@
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const email = this.querySelector('input[type="email"]').value;
             const password = this.querySelector('input[type="password"]').value;
-            
+
             if (email && password) {
                 showAlert(`Login berhasil untuk email: ${email}`);
             } else {
@@ -350,7 +350,7 @@
             input.addEventListener('focus', function() {
                 this.parentElement.style.transform = 'translateY(-2px)';
             });
-            
+
             input.addEventListener('blur', function() {
                 this.parentElement.style.transform = 'translateY(0)';
             });
