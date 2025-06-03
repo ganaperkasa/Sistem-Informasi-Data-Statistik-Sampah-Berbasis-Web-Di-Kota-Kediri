@@ -6,12 +6,45 @@
     <link rel="icon" type="image/x-icon" href="{{ asset("assets/img/daur.png") }}" />
     <title>DLHKP - Kota Kediri</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <style>
+
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        /* Styling Peta */
+#map {
+    height: 600px;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+/* LEGEND untuk peta */
+.map-legend {
+    line-height: 18px;
+    color: #555;
+}
+.map-legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -48,6 +81,7 @@
             align-items: center;
             gap: 15px;
         }
+
 
         .logo-icon {
             width: 130px;
@@ -556,7 +590,7 @@
                 <div class="nav-links">
                     <a href="#" class="nav-link active" data-page="beranda">Beranda</a>
                     <a href="#" class="nav-link" data-page="data-sampah">Data Sampah</a>
-                    <a href="#" class="nav-link" data-page="regulasi">Regulasi</a>
+                    <a href="#" class="nav-link" data-page="peta">Peta</a>
                     <a href="#" class="nav-link" data-page="fasilitas">Fasilitas</a>
                     <a href="#" class="nav-link" data-page="kontak">Kontak</a>
                     <a href="{{ url('/login') }}" class="nav-link">Login</a>
@@ -665,44 +699,24 @@
             </div>
 
             <!-- Halaman Regulasi -->
-            <div id="regulasi" class="page-content">
-                <h1 class="page-title">Regulasi Pengelolaan Sampah</h1>
+            <div id="peta" class="page-content">
+                <h1 class="page-title">Peta Tempat Pembuangan Sampah</h1>
 
                 <div class="content-section">
-                    <h2 class="section-title">Peraturan Nasional</h2>
+                    <h2 class="section-title">Tempat Pembuangan Sampah</h2>
                     <ul class="regulation-list">
-                        <li class="regulation-item">
-                            <div class="regulation-title">UU No. 18 Tahun 2008</div>
-                            <div class="regulation-description">Undang-Undang tentang Pengelolaan Sampah yang menjadi dasar hukum pengelolaan sampah di Indonesia.</div>
-                        </li>
-                        <li class="regulation-item">
-                            <div class="regulation-title">PP No. 27 Tahun 2020</div>
-                            <div class="regulation-description">Peraturan Pemerintah tentang Pengelolaan Sampah Spesifik, termasuk sampah elektronik dan B3.</div>
-                        </li>
-                        <li class="regulation-item">
-                            <div class="regulation-title">Permen LHK No. 13 Tahun 2012</div>
-                            <div class="regulation-description">Pedoman Pelaksanaan Reduce, Reuse, dan Recycle melalui Bank Sampah.</div>
-                        </li>
-                        <li class="regulation-item">
-                            <div class="regulation-title">Permen LHK No. 75 Tahun 2019</div>
-                            <div class="regulation-description">Peta Jalan Pengurangan Sampah Oleh Produsen untuk mendukung ekonomi sirkular.</div>
-                        </li>
+                        <div class="card-body">
+
+                        <div id="map"></div>
+                        <!-- Make sure you put this AFTER Leaflet's CSS -->
+                        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+                        </div>
+
                     </ul>
                 </div>
 
-                <div class="content-section">
-                    <h2 class="section-title">Kebijakan Terkini</h2>
-                    <div class="info-grid">
-                        <div class="info-card">
-                            <div class="info-title">Target Pengurangan Sampah</div>
-                            <p>Pemerintah menargetkan pengurangan sampah sebesar 30% dan penanganan sampah 70% pada tahun 2025.</p>
-                        </div>
-                        <div class="info-card">
-                            <div class="info-title">Program Ekonomi Sirkular</div>
-                            <p>Implementasi konsep ekonomi sirkular dalam pengelolaan sampah untuk menciptakan nilai tambah.</p>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
             <!-- Halaman Fasilitas -->
@@ -712,20 +726,20 @@
                 <div class="content-section">
                     <h2 class="section-title">Jenis Fasilitas</h2>
                     <div class="facility-grid">
-                        @foreach ($locations as $location)
+                        @foreach ($spt as $tp)
                             <div class="facility-card">
-                                <h3 class="facility-name">{{ $location->name }}</h3>
+                                <h3 class="facility-name">{{ $tp->location->name }}</h3>
                                 <span class="facility-type">Tempat Pengumpulan Sampah</span>
                                 <div class="facility-info">
-                                    <p><strong>Jam Operasional:</strong> {{ $location->jam_operasional }}</p>
-                                    <p><strong>Kapasitas:</strong> {{ $location->kapasitas_tps }} ton/hari</p>
-                                    <p><strong>Fasilitas:</strong> {{ $location->fasilitas }}</p>
+                                    <p><strong>Jam Operasional:</strong> {{ $tp->jam_operasional }}</p>
+                                    <p><strong>Kapasitas:</strong> {{ $tp->kapasitas_tps }} ton/hari</p>
+                                    <p><strong>Fasilitas:</strong> {{ $tp->fasilitas }}</p>
                                     <p><strong>Foto Lokasi:</strong> </p>
                                 </div>
 
-                                @if($location->foto_lokasi)
+                                @if($tp->foto_lokasi)
                                     <div class="facility-image">
-                                        <img src="{{ asset('storage/' . $location->foto_lokasi) }}" alt="Foto TPS" style="width:80%; height:auto;">
+                                        <img src="{{ asset('storage/' . $tp->foto_lokasi) }}" class="img-thumbnail" style="width: 80px;">
                                     </div>
                                 @endif
                             </div>
@@ -825,6 +839,7 @@ const values = @json($reduksiData->pluck('reduksi_kg'));
 const colors = generateGreenColors(labels.length);
 
 let chart; // Variabel global untuk chart
+let map; // Variabel global untuk map
 
 // Inisialisasi chart
 function initChart() {
@@ -863,6 +878,64 @@ function initChart() {
                 }
             }
         });
+    }
+}
+
+// Inisialisasi peta
+function initMap() {
+    const mapContainer = document.getElementById('map');
+    if (mapContainer && typeof L !== 'undefined') {
+        // Hapus map yang sudah ada jika ada
+        if (map) {
+            map.remove();
+        }
+
+        // Inisialisasi peta baru
+        map = L.map('map').setView([-7.8267704, 112.0197845], 13);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 26,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // Tampilkan marker dari database
+        @foreach ($locations as $location)
+        var marker = L.marker([{{ $location->latitude }}, {{ $location->longitude }}]).addTo(map);
+        marker.bindTooltip(
+            "{{ $location->name ?: 'Lokasi Tanpa Nama' }}",
+            { permanent: true, direction: 'top', className: 'my-labels' }
+        );
+        marker.bindPopup(`
+            <div class="p-2">
+                <h5>{{ $location->name ?: 'Lokasi Tanpa Nama' }}</h5>
+                <div class="text-muted small">
+                    Latitude: {{ $location->latitude }}<br>
+                    Longitude: {{ $location->longitude }}
+                </div>
+                <div class="text-muted small">
+                    @if($location->tps && $location->tps->foto_lokasi)
+                        <img src="{{ asset('storage/' . $location->tps->foto_lokasi) }}" class="img-thumbnail" style="width: 80px;">
+                    @else
+                        <span>Tidak ada foto</span>
+                    @endif
+                </div>
+                <div class="mt-1 small">
+                    <i class="bx bx-calendar"></i> {{ $location->created_at->format('d M Y') }}
+                </div>
+            </div>
+        `);
+        @endforeach
+
+        // Jika ada lokasi, set view ke lokasi pertama
+        @if ($locations->isNotEmpty())
+            map.setView([{{ $locations[0]->latitude }}, {{ $locations[0]->longitude }}], 13);
+        @endif
+
+        // Refresh ukuran map setelah container terlihat
+        setTimeout(() => {
+            if (map) {
+                map.invalidateSize();
+            }
+        }, 250);
     }
 }
 
@@ -1009,6 +1082,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.classList.add('active');
             }
         });
+
+        // Inisialisasi komponen berdasarkan halaman yang aktif
+        setTimeout(() => {
+            if (pageId === 'data-sampah') {
+                // Inisialisasi chart untuk halaman data-sampah
+                if (document.getElementById('wasteChart')) {
+                    initChart();
+                    updateLegend();
+                    updateStats();
+                }
+            } else if (pageId === 'peta' || pageId === 'lokasi') {
+                // Inisialisasi map untuk halaman peta/lokasi
+                if (document.getElementById('map')) {
+                    initMap();
+                }
+            }
+        }, 100);
     }
 
     // Event listener untuk navigasi
@@ -1035,15 +1125,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Inisialisasi halaman
     showPage(initialPage);
-
-    // Inisialisasi chart hanya jika berada di halaman data-sampah
-    if (initialPage === 'data-sampah' || document.getElementById('wasteChart')) {
-        setTimeout(() => {
-            initChart();
-            updateLegend();
-            updateStats();
-        }, 100);
-    }
 });
 
 // Contact form functionality
@@ -1069,6 +1150,15 @@ document.addEventListener('DOMContentLoaded', function() {
             contactForm.reset();
         });
     }
+
+    // Window resize handler untuk map
+    window.addEventListener('resize', function() {
+        if (map) {
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 100);
+        }
+    });
 });
         </script>
 

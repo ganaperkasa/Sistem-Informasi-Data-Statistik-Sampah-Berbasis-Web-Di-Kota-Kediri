@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ReduksiSampah;
 use App\Models\Location;
+use App\Models\Tps;
 
 class LandingpageController extends Controller
 {
@@ -17,38 +18,32 @@ class LandingpageController extends Controller
     public function index(Request $request)
 {
     $tahun = $request->query('tahun', date('Y'));
-    $tps = $request->query('tps');
+    $tpsName = $request->query('tps');
 
-    $query = DB::table('reduksi_sampah')
+    // Ambil data reduksi sampah
+    $reduksiQuery = DB::table('reduksi_sampah')
         ->join('locations', 'reduksi_sampah.location_id', '=', 'locations.id')
         ->select('locations.name', DB::raw('SUM(reduksi_sampah.reduksi_kg) as reduksi_kg'))
         ->whereYear('reduksi_sampah.reduction_date', $tahun);
 
-    if ($tps) {
-        $query->where('locations.name', $tps);
+    if ($tpsName) {
+        $reduksiQuery->where('locations.name', $tpsName);
     }
 
-    $data = $query->groupBy('locations.name')->get();
+    $reduksiData = $reduksiQuery->groupBy('locations.name')->get();
 
-    $locations = DB::table('locations')
-    ->join('tps', 'locations.id', '=', 'tps.locations_id')
-    ->select(
-        'locations.name',
-        'tps.jam_operasional',
-        'tps.kapasitas_tps',
-        'tps.fasilitas',
-        'tps.foto_lokasi'
-    )
-    ->get();
- // untuk dropdown TPS
-
+    // Ambil lokasi lengkap beserta relasi tps (pakai model)
+    $locations = Location::with('tps')->get();
+    $tps = Tps::with('location')->get();
     return view('landingpage', [
         'tahun' => $tahun,
-        'reduksiData' => $data,
-        'tps' => $tps,
+        'reduksiData' => $reduksiData,
+        'tps' => $tpsName,
+        'spt' => $tps,
         'locations' => $locations,
     ]);
 }
+
 
 
 
