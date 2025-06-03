@@ -377,6 +377,16 @@
             border-top: 4px solid #4caf50;
         }
 
+        .facility-image {
+    margin-top: 10px;
+}
+
+.facility-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
         .facility-name {
             font-size: 18px;
             font-weight: bold;
@@ -738,10 +748,11 @@
                                 </div>
 
                                 @if($tp->foto_lokasi)
-                                    <div class="facility-image">
-                                        <img src="{{ asset('storage/' . $tp->foto_lokasi) }}" class="img-thumbnail" style="width: 80px;">
-                                    </div>
-                                @endif
+                                <div class="facility-image">
+                                    <img src="{{ asset('storage/' . $tp->foto_lokasi) }}" class="img-thumbnail facility-img">
+                                </div>
+                            @endif
+
                             </div>
                         @endforeach
                     </div>
@@ -890,10 +901,10 @@ function initMap() {
             map.remove();
         }
 
-        // Inisialisasi peta baru
-        map = L.map('map').setView([-7.8267704, 112.0197845], 13);
+        // Inisialisasi peta baru-7.8274268,112.0290482
+        map = L.map('map').setView([-7.8274268, 112.0290482], 12.5);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 26,
+            maxZoom: 20,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
@@ -927,7 +938,7 @@ function initMap() {
 
         // Jika ada lokasi, set view ke lokasi pertama
         @if ($locations->isNotEmpty())
-            map.setView([{{ $locations[0]->latitude }}, {{ $locations[0]->longitude }}], 13);
+            map.setView([{{ $locations[5]->latitude }}, {{ $locations[5]->longitude }}], 13);
         @endif
 
         // Refresh ukuran map setelah container terlihat

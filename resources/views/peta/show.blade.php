@@ -68,7 +68,7 @@
 
             // Jika ada lokasi, set view ke lokasi pertama
             @if ($locations->isNotEmpty())
-                map.setView([{{ $locations[0]->latitude }}, {{ $locations[0]->longitude }}], 13);
+                map.setView([{{ $locations[5]->latitude }}, {{ $locations[5]->longitude }}], 13);
             @endif
         </script>
     @endpush

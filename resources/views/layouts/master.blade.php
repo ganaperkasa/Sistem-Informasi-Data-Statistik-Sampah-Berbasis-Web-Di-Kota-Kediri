@@ -96,6 +96,15 @@
             margin-right: 8px;
             opacity: 0.7;
         }
+        .my-labels {
+    font-size: 9px; /* Atur ukuran font sesuai keinginan */
+    font-weight: normal;
+    padding: 2px 4px;
+    background: rgba(255, 255, 255, 0.8); /* Opsional: latar belakang */
+    border-radius: 4px; /* Opsional: sudut melengkung */
+    color: #333; /* Opsional: warna teks */
+}
+
     </style>
 
     <!-- Vendors CSS -->
