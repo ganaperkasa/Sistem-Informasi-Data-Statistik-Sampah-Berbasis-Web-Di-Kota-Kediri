@@ -1,10 +1,10 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
       <a href="" class="app-brand-link">
-        <span class="app-brand-logo demo">
-
+        <span class="app-brand-logo demo" style="background-color: #f0f0f0; padding: 8px; border-radius: 8px; display: inline-block;">
+            <img src="{{ asset('assets/img/logo.png') }}" alt="brand-logo" style="width: 180px; height: auto;">
         </span>
-        <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">

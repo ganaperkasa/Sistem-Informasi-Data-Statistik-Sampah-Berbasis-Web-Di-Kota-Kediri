@@ -22,13 +22,12 @@
                 <tbody class="table-border-bottom-0">
                     @foreach ($tps as $tp)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $loop->iteration + $tps->firstItem() - 1 }}</td>
                             <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
                                 <strong>{{ $tp->location->name ?? '-' }}</strong>
                             </td>
                             <td>{{ $tp->jumlah_pekerja }}</td>
                             <td>{{ $tp->luas }}</td>
-
                             <td>
                                 <a href="{{ route('tps.edit', $tp->id) }}" class="btn btn-outline-primary ">Lengkapi</a>
                                 <button type="button" class="btn btn-outline-info " data-bs-toggle="modal"

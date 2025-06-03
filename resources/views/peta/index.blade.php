@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Tambah Peta')
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
 <div class="row">
     <div class="col-md-12 col-lg-12 order-0 mb-4">
         <div class="card h-1000">
@@ -17,7 +16,6 @@
       </div>
 
   </div>
-</div>
 @push('js');
 
 <script>
