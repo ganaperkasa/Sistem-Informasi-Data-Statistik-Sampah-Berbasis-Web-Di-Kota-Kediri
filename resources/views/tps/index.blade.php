@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Peta')
+@section('title', 'Data TPS')
 @section('content')
     <h4 class="fw-bold py-3 mb-4">
         <span class="text-muted fw-light">Data TPS /</span> Daftar TPS

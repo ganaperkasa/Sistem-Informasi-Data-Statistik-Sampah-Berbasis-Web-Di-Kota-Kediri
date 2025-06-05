@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@section('title', 'Data Sampah Masuk')
 @section('content')
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Pengelolaan Sampah /</span> Daftar Sampah Masuk</h4>
 

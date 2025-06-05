@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@section('title', 'Data Sampah Keluar')
 @section('content')
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Pengelolaan Sampah /</span> Daftar Sampah Keluar</h4>
 
@@ -27,8 +27,6 @@
                             <th>Tanggal</th>
                             <th>Sampah Keluar (kg)</th>
 
-                            <th>Aksi</th>
-
                         </tr>
                     </thead>
 
@@ -39,14 +37,6 @@
                                 <td>{{ $data->location->name }}</td>
                                 <td>{{ $data->outflow_date }}</td>
                                 <td>{{ $data->amount_kg }}</td>
-                                <td>
-                                    {{-- <a href="{{ route('sampah_keluar.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a> --}}
-                                    {{-- <form action="{{ route('sampah_keluar.destroy', $data->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
-                                    </form> --}}
-                                </td>
                             </tr>
 
                         @empty
