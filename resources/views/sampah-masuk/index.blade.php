@@ -3,17 +3,17 @@
 @section('content')
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Pengelolaan Sampah /</span> Daftar Sampah Masuk</h4>
 
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Daftar Sampah Masuk</h5>
             <a href="{{ route('waste_entries.create') }}" class="btn rounded-pill btn-primary btn-md">Tambah Sampah Masuk</a>
         </div>
 
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
 
             {{-- <a href="{{ route('reduksi_sampah.create') }}" class="btn btn-primary mb-3">Tambah Data Reduksi</a> --}}
 

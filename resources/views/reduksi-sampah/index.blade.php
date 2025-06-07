@@ -2,18 +2,18 @@
 @section('title', 'Data Reduksi Sampah')
 @section('content')
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Reduksi Sampah /</span> Daftar Reduksi Sampah</h4>
-
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Daftar Reduksi Sampah</h5>
             <a href="{{ route('reduksi_sampah.create') }}" class="btn rounded-pill btn-primary btn-md">Tambah Data Reduksi</a>
         </div>
 
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+
 
             {{-- <a href="{{ route('reduksi_sampah.create') }}" class="btn btn-primary mb-3">Tambah Data Reduksi</a> --}}
 

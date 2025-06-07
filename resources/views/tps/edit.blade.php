@@ -2,6 +2,16 @@
 @section('title', 'Edit Data TPS')
 @section('content')
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Ups!</strong> Ada beberapa masalah dengan inputan Anda:
+        <ul class="mb-0 mt-2">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="row">
         <!-- Basic Layout -->
         <div class="col-xxl">

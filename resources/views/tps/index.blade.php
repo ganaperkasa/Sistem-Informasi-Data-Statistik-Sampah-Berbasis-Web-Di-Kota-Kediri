@@ -4,6 +4,12 @@
     <h4 class="fw-bold py-3 mb-4">
         <span class="text-muted fw-light">Data TPS /</span> Daftar TPS
     </h4>
+    @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
 
     <div class="card">
         <h5 class="card-header">Daftar TPS</h5>
@@ -14,7 +20,7 @@
                         <th>No</th>
                         <th>Nama TPS</th>
                         <th>Jumlah Pekerja</th>
-                        <th>Luas TPS</th>
+                        <th>Luas (m²) TPS</th>
 
                         <th>Aksi</th>
                     </tr>

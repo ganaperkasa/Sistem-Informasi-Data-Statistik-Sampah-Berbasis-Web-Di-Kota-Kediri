@@ -1,50 +1,52 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ asset("assets/img/daur.png") }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/daur.png') }}" />
     <title>DLHKP - Kota Kediri</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <style>
-
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         /* Styling Peta */
-#map {
-    height: 600px;
-}
+        #map {
+            height: 600px;
+        }
 
-.info {
-    padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background: rgba(255,255,255,0.8);
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    border-radius: 5px;
-}
-.info h4 {
-    margin: 0 0 5px;
-    color: #777;
-}
+        .info {
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
 
-/* LEGEND untuk peta */
-.map-legend {
-    line-height: 18px;
-    color: #555;
-}
-.map-legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-}
+        .info h4 {
+            margin: 0 0 5px;
+            color: #777;
+        }
+
+        /* LEGEND untuk peta */
+        .map-legend {
+            line-height: 18px;
+            color: #555;
+        }
+
+        .map-legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -302,7 +304,8 @@
             color: #2e7d32;
         }
 
-        .form-input, .form-textarea {
+        .form-input,
+        .form-textarea {
             width: 100%;
             padding: 12px;
             border: 2px solid #c8e6c9;
@@ -311,7 +314,8 @@
             transition: border-color 0.3s ease;
         }
 
-        .form-input:focus, .form-textarea:focus {
+        .form-input:focus,
+        .form-textarea:focus {
             outline: none;
             border-color: #4caf50;
         }
@@ -378,14 +382,14 @@
         }
 
         .facility-image {
-    margin-top: 10px;
-}
+            margin-top: 10px;
+        }
 
-.facility-img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
+        .facility-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
 
         .facility-name {
             font-size: 18px;
@@ -476,7 +480,7 @@
             height: 400px;
             background: white;
             justify-content: center;
-        align-items: center;
+            align-items: center;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 10px rgba(46, 125, 50, 0.1);
@@ -584,11 +588,17 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header class="header">
@@ -614,29 +624,35 @@
                 <div class="hero-section">
                     <h1 class="hero-title">Selamat Datang</h1>
                     <p class="hero-subtitle">Sistem Informasi Pengelolaan Sampah Kota Kediri</p>
-                    <p class="hero-description">Platform terintegrasi untuk monitoring dan pengelolaan data sampah di seluruh kota kediri. Berkomitmen untuk Indonesia yang lebih bersih dan berkelanjutan melalui pengelolaan sampah yang efektif.</p>
+                    <p class="hero-description">Platform terintegrasi untuk monitoring dan pengelolaan data sampah di
+                        seluruh kota kediri. Berkomitmen untuk Indonesia yang lebih bersih dan berkelanjutan melalui
+                        pengelolaan sampah yang efektif.</p>
                 </div>
 
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">📊</div>
                         <h3 class="feature-title">Data Komprehensif</h3>
-                        <p class="feature-description">Akses data lengkap komposisi sampah dari berbagai daerah di Indonesia dengan visualisasi yang mudah dipahami.</p>
+                        <p class="feature-description">Akses data lengkap komposisi sampah dari berbagai daerah di
+                            Indonesia dengan visualisasi yang mudah dipahami.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">📋</div>
                         <h3 class="feature-title">Regulasi Terkini</h3>
-                        <p class="feature-description">Informasi terbaru mengenai peraturan dan kebijakan pengelolaan sampah nasional dan daerah.</p>
+                        <p class="feature-description">Informasi terbaru mengenai peraturan dan kebijakan pengelolaan
+                            sampah nasional dan daerah.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🏭</div>
                         <h3 class="feature-title">Peta Fasilitas</h3>
-                        <p class="feature-description">Lokasi dan informasi fasilitas pengelolaan sampah seperti TPA, TPS, dan bank sampah di seluruh Indonesia.</p>
+                        <p class="feature-description">Lokasi dan informasi fasilitas pengelolaan sampah seperti TPA,
+                            TPS, dan bank sampah di seluruh Indonesia.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🤝</div>
                         <h3 class="feature-title">Kolaborasi</h3>
-                        <p class="feature-description">Platform untuk berkolaborasi dengan stakeholder dalam upaya pengelolaan sampah yang lebih baik.</p>
+                        <p class="feature-description">Platform untuk berkolaborasi dengan stakeholder dalam upaya
+                            pengelolaan sampah yang lebih baik.</p>
                     </div>
                 </div>
             </div>
@@ -717,10 +733,10 @@
                     <ul class="regulation-list">
                         <div class="card-body">
 
-                        <div id="map"></div>
-                        <!-- Make sure you put this AFTER Leaflet's CSS -->
-                        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-                            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+                            <div id="map"></div>
+                            <!-- Make sure you put this AFTER Leaflet's CSS -->
+                            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                                integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
                         </div>
 
                     </ul>
@@ -747,11 +763,12 @@
                                     <p><strong>Foto Lokasi:</strong> </p>
                                 </div>
 
-                                @if($tp->foto_lokasi)
-                                <div class="facility-image">
-                                    <img src="{{ asset('storage/' . $tp->foto_lokasi) }}" class="img-thumbnail facility-img">
-                                </div>
-                            @endif
+                                @if ($tp->foto_lokasi)
+                                    <div class="facility-image">
+                                        <img src="{{ asset('storage/' . $tp->foto_lokasi) }}"
+                                            class="img-thumbnail facility-img">
+                                    </div>
+                                @endif
 
                             </div>
                         @endforeach
@@ -793,20 +810,22 @@
                         <div class="info-card">
                             <div class="info-title">Alamat Kantor</div>
                             <p>Kementerian Lingkungan Hidup dan Kehutanan<br>
-                            Gedung Manggala Wanabakti Blok VII Lantai 6<br>
-                            Jl. Gatot Subroto, Jakarta Pusat 10270</p>
+                                Gedung Manggala Wanabakti Blok VII Lantai 6<br>
+                                Jl. Gatot Subroto, Jakarta Pusat 10270</p>
                         </div>
                         <div class="info-card">
                             <div class="info-title">Kontak</div>
                             <p><strong>Telepon:</strong> (021) 5720227<br>
-                            <strong>Email:</strong> info@sipsn.menlhk.go.id<br>
-                            <strong>Website:</strong> www.sipsn.menlhk.go.id</p>
+                                <strong>Email:</strong> info@sipsn.menlhk.go.id<br>
+                                <strong>Website:</strong> www.sipsn.menlhk.go.id
+                            </p>
                         </div>
                         <div class="info-card">
                             <div class="info-title">Jam Operasional</div>
                             <p><strong>Senin - Jumat:</strong> 08:00 - 16:00 WIB<br>
-                            <strong>Sabtu - Minggu:</strong> Tutup<br>
-                            <strong>Layanan Online:</strong> 24/7</p>
+                                <strong>Sabtu - Minggu:</strong> Tutup<br>
+                                <strong>Layanan Online:</strong> 24/7
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -845,334 +864,334 @@
 
     <script>
         // Data dan variabel global
-const labels = @json($reduksiData->pluck('name'));
-const values = @json($reduksiData->pluck('reduksi_kg'));
-const colors = generateGreenColors(labels.length);
+        const labels = @json($reduksiData->pluck('name'));
+        const values = @json($reduksiData->pluck('reduksi_kg'));
+        const colors = generateGreenColors(labels.length);
 
-let chart; // Variabel global untuk chart
-let map; // Variabel global untuk map
+        let chart; // Variabel global untuk chart
+        let map; // Variabel global untuk map
 
-// Inisialisasi chart
-function initChart() {
-    const ctx = document.getElementById('wasteChart');
-    if (ctx) {
-        chart = new Chart(ctx.getContext('2d'), {
-            type: 'doughnut',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: values,
-                    backgroundColor: colors,
-                    borderWidth: 2,
-                    borderColor: '#fff',
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
+        // Inisialisasi chart
+        function initChart() {
+            const ctx = document.getElementById('wasteChart');
+            if (ctx) {
+                chart = new Chart(ctx.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: values,
+                            backgroundColor: colors,
+                            borderWidth: 2,
+                            borderColor: '#fff',
+                        }]
                     },
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                return tooltipItem.label + ': ' + tooltipItem.raw + ' kg';
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return tooltipItem.label + ': ' + tooltipItem.raw + ' kg';
+                                    }
+                                }
+                            }
+                        },
+                        elements: {
+                            arc: {
+                                cutout: '50%'
                             }
                         }
                     }
-                },
-                elements: {
-                    arc: {
-                        cutout: '50%'
-                    }
-                }
+                });
             }
-        });
-    }
-}
-
-// Inisialisasi peta
-function initMap() {
-    const mapContainer = document.getElementById('map');
-    if (mapContainer && typeof L !== 'undefined') {
-        // Hapus map yang sudah ada jika ada
-        if (map) {
-            map.remove();
         }
 
-        // Inisialisasi peta baru-7.8274268,112.0290482
-        map = L.map('map').setView([-7.8274268, 112.0290482], 12.5);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+        // Inisialisasi peta
+        function initMap() {
+            const mapContainer = document.getElementById('map');
+            if (mapContainer && typeof L !== 'undefined') {
+                // Hapus map yang sudah ada jika ada
+                if (map) {
+                    map.remove();
+                }
 
-        // Tampilkan marker dari database
-        @foreach ($locations as $location)
-        var marker = L.marker([{{ $location->latitude }}, {{ $location->longitude }}]).addTo(map);
-        marker.bindTooltip(
-            "{{ $location->name ?: 'Lokasi Tanpa Nama' }}",
-            { permanent: true, direction: 'top', className: 'my-labels' }
-        );
-        marker.bindPopup(`
+                // Inisialisasi peta baru-7.8274268,112.0290482
+                map = L.map('map').setView([-7.8274268, 112.0290482], 12.5);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 20,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+
+                // Tampilkan marker dari database
+                @foreach ($locations as $location)
+                    var marker = L.marker([{{ $location->latitude }}, {{ $location->longitude }}]).addTo(map);
+                    marker.bindTooltip(
+                        "{{ $location->name ?: 'Lokasi Tanpa Nama' }}", {
+                            permanent: true,
+                            direction: 'top',
+                            className: 'my-labels'
+                        }
+                    );
+                    marker.bindPopup(`
             <div class="p-2">
                 <h5>{{ $location->name ?: 'Lokasi Tanpa Nama' }}</h5>
                 <div class="text-muted small">
-                    Latitude: {{ $location->latitude }}<br>
-                    Longitude: {{ $location->longitude }}
-                </div>
-                <div class="text-muted small">
-                    @if($location->tps && $location->tps->foto_lokasi)
-                        <img src="{{ asset('storage/' . $location->tps->foto_lokasi) }}" class="img-thumbnail" style="width: 80px;">
-                    @else
-                        <span>Tidak ada foto</span>
-                    @endif
-                </div>
-                <div class="mt-1 small">
-                    <i class="bx bx-calendar"></i> {{ $location->created_at->format('d M Y') }}
+                    @foreach ($location->tps as $tps )
+
+                    Jumlah Pekerja: {{ $tps->jumlah_pekerja }}<br>
+                    Sampah Masuk (kg): {{ $tps->sampah_masuk }}<br>
+                    Luas (m²): {{ $tps->luas }}<br>
+                    Resuksi Sampah:
+
+                    @endforeach
                 </div>
             </div>
         `);
-        @endforeach
+                @endforeach
 
-        // Jika ada lokasi, set view ke lokasi pertama
-        @if ($locations->isNotEmpty())
-            map.setView([{{ $locations[5]->latitude }}, {{ $locations[5]->longitude }}], 13);
-        @endif
+                // Jika ada lokasi, set view ke lokasi pertama
+                @if ($locations->isNotEmpty())
+                    map.setView([{{ $locations[5]->latitude }}, {{ $locations[5]->longitude }}], 13);
+                @endif
 
-        // Refresh ukuran map setelah container terlihat
-        setTimeout(() => {
-            if (map) {
-                map.invalidateSize();
+                // Refresh ukuran map setelah container terlihat
+                setTimeout(() => {
+                    if (map) {
+                        map.invalidateSize();
+                    }
+                }, 250);
             }
-        }, 250);
-    }
-}
+        }
 
-// Generate warna hijau
-function generateGreenColors(count) {
-    const colors = [];
-    for (let i = 0; i < count; i++) {
-        const hue = Math.floor(Math.random() * 60) + 90;
-        const saturation = Math.floor(Math.random() * 30) + 60;
-        const lightness = Math.floor(Math.random() * 20) + 40;
-        colors.push(`hsl(${hue}, ${saturation}%, ${lightness}%)`);
-    }
-    return colors;
-}
+        // Generate warna hijau
+        function generateGreenColors(count) {
+            const colors = [];
+            for (let i = 0; i < count; i++) {
+                const hue = Math.floor(Math.random() * 60) + 90;
+                const saturation = Math.floor(Math.random() * 30) + 60;
+                const lightness = Math.floor(Math.random() * 20) + 40;
+                colors.push(`hsl(${hue}, ${saturation}%, ${lightness}%)`);
+            }
+            return colors;
+        }
 
-// Update legend
-function updateLegend() {
-    const legendContainer = document.getElementById('chartLegend');
-    if (legendContainer && labels && values) {
-        legendContainer.innerHTML = '';
-        labels.forEach((label, index) => {
-            const legendItem = document.createElement('div');
-            legendItem.className = 'legend-item';
-            legendItem.innerHTML = `
+        // Update legend
+        function updateLegend() {
+            const legendContainer = document.getElementById('chartLegend');
+            if (legendContainer && labels && values) {
+                legendContainer.innerHTML = '';
+                labels.forEach((label, index) => {
+                    const legendItem = document.createElement('div');
+                    legendItem.className = 'legend-item';
+                    legendItem.innerHTML = `
                 <div class="legend-color" style="background-color: ${colors[index]}"></div>
                 <span class="legend-label">${label}: ${values[index]} kg</span>
             `;
-            legendContainer.appendChild(legendItem);
-        });
-    }
-}
-
-// Filter data
-function applyFilters() {
-    const year = document.getElementById('yearSelect').value;
-    const tps = document.getElementById('tpsSelect').value;
-    let url = `?tahun=${year}`;
-    if (tps !== '') {
-        url += `&tps=${encodeURIComponent(tps)}`;
-    }
-    // Tambahkan parameter page untuk mempertahankan halaman yang aktif
-    url += `&page=data-sampah`;
-    window.location.href = url;
-}
-
-// Update statistik
-function updateStats() {
-    // Hitung total dari data yang ada
-    const total = values.reduce((sum, val) => sum + parseFloat(val), 0);
-
-    // Update total waste
-    const totalWasteElement = document.getElementById('totalWaste');
-    if (totalWasteElement) {
-        totalWasteElement.textContent = total.toFixed(1) + ' kg';
-    }
-
-    // Untuk statistik lainnya, kita bisa menghitung persentase
-    // atau menggunakan data statis jika tidak ada data spesifik
-    const organicWasteElement = document.getElementById('organicWaste');
-    const plasticWasteElement = document.getElementById('plasticWaste');
-    const paperWasteElement = document.getElementById('paperWaste');
-
-    if (organicWasteElement) organicWasteElement.textContent = '57.8%';
-    if (plasticWasteElement) plasticWasteElement.textContent = '17.4%';
-    if (paperWasteElement) paperWasteElement.textContent = '10.7%';
-}
-
-// Loading functions
-function showLoading() {
-    const loadingElement = document.getElementById('loading');
-    const chartSection = document.querySelector('.chart-section');
-    if (loadingElement) loadingElement.style.display = 'block';
-    if (chartSection) chartSection.style.opacity = '0.5';
-}
-
-function hideLoading() {
-    const loadingElement = document.getElementById('loading');
-    const chartSection = document.querySelector('.chart-section');
-    if (loadingElement) loadingElement.style.display = 'none';
-    if (chartSection) chartSection.style.opacity = '1';
-}
-
-function updateData() {
-    showLoading();
-    setTimeout(() => {
-        if (chart) {
-            chart.update('active');
-        }
-        updateLegend();
-        updateStats();
-        hideLoading();
-    }, 800);
-}
-
-// Fungsi untuk mengupdate URL
-function updateUrl(pageId) {
-    const url = new URL(window.location);
-
-    if (pageId === 'beranda') {
-        // Untuk halaman beranda, hapus semua parameter
-        url.search = '';
-    } else {
-        // Untuk halaman lain, set parameter page
-        url.searchParams.set('page', pageId);
-
-        // Hapus parameter yang tidak relevan untuk halaman selain data-sampah
-        if (pageId !== 'data-sampah') {
-            url.searchParams.delete('tahun');
-            url.searchParams.delete('tps');
-        }
-    }
-
-    // Update URL tanpa reload halaman
-    window.history.pushState({}, '', url);
-}
-
-// Fungsi untuk mendapatkan parameter URL
-function getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-}
-
-// Inisialisasi halaman dan navigasi
-document.addEventListener('DOMContentLoaded', function() {
-    // Fungsi untuk menampilkan halaman tertentu
-    function showPage(pageId) {
-        // Sembunyikan semua halaman
-        document.querySelectorAll('.page-content').forEach(page => {
-            page.classList.remove('active');
-        });
-
-        // Tampilkan halaman yang dipilih
-        const targetPage = document.getElementById(pageId);
-        if (targetPage) {
-            targetPage.classList.add('active');
+                    legendContainer.appendChild(legendItem);
+                });
+            }
         }
 
-        // Update status aktif di navbar
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
-            if(link.getAttribute('data-page') === pageId) {
-                link.classList.add('active');
+        // Filter data
+        function applyFilters() {
+            const year = document.getElementById('yearSelect').value;
+            const tps = document.getElementById('tpsSelect').value;
+            let url = `?tahun=${year}`;
+            if (tps !== '') {
+                url += `&tps=${encodeURIComponent(tps)}`;
             }
-        });
+            // Tambahkan parameter page untuk mempertahankan halaman yang aktif
+            url += `&page=data-sampah`;
+            window.location.href = url;
+        }
 
-        // Inisialisasi komponen berdasarkan halaman yang aktif
-        setTimeout(() => {
-            if (pageId === 'data-sampah') {
-                // Inisialisasi chart untuk halaman data-sampah
-                if (document.getElementById('wasteChart')) {
-                    initChart();
-                    updateLegend();
-                    updateStats();
-                }
-            } else if (pageId === 'peta' || pageId === 'lokasi') {
-                // Inisialisasi map untuk halaman peta/lokasi
-                if (document.getElementById('map')) {
-                    initMap();
-                }
+        // Update statistik
+        function updateStats() {
+            // Hitung total dari data yang ada
+            const total = values.reduce((sum, val) => sum + parseFloat(val), 0);
+
+            // Update total waste
+            const totalWasteElement = document.getElementById('totalWaste');
+            if (totalWasteElement) {
+                totalWasteElement.textContent = total.toFixed(1) + ' kg';
             }
-        }, 100);
-    }
 
-    // Event listener untuk navigasi
-    document.querySelectorAll('.nav-link[data-page]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Abaikan link login
-            if(this.getAttribute('href') !== '{{ url("/login") }}') {
-                e.preventDefault();
-                const page = this.getAttribute('data-page');
-                showPage(page);
-                updateUrl(page);
-            }
-        });
-    });
+            // Untuk statistik lainnya, kita bisa menghitung persentase
+            // atau menggunakan data statis jika tidak ada data spesifik
+            const organicWasteElement = document.getElementById('organicWaste');
+            const plasticWasteElement = document.getElementById('plasticWaste');
+            const paperWasteElement = document.getElementById('paperWaste');
 
-    // Cek apakah ada parameter page dari URL
-    const pageParam = getUrlParameter('page');
-    let initialPage = 'beranda'; // default page
+            if (organicWasteElement) organicWasteElement.textContent = '57.8%';
+            if (plasticWasteElement) plasticWasteElement.textContent = '17.4%';
+            if (paperWasteElement) paperWasteElement.textContent = '10.7%';
+        }
 
-    // Jika ada parameter page, gunakan itu
-    if (pageParam && pageParam !== '') {
-        initialPage = pageParam;
-    }
+        // Loading functions
+        function showLoading() {
+            const loadingElement = document.getElementById('loading');
+            const chartSection = document.querySelector('.chart-section');
+            if (loadingElement) loadingElement.style.display = 'block';
+            if (chartSection) chartSection.style.opacity = '0.5';
+        }
 
-    // Inisialisasi halaman
-    showPage(initialPage);
-});
+        function hideLoading() {
+            const loadingElement = document.getElementById('loading');
+            const chartSection = document.querySelector('.chart-section');
+            if (loadingElement) loadingElement.style.display = 'none';
+            if (chartSection) chartSection.style.opacity = '1';
+        }
 
-// Contact form functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Get form data
-            const formData = {
-                name: document.getElementById('fullName').value,
-                email: document.getElementById('email').value,
-                organization: document.getElementById('organization').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
-            };
-
-            // Simulate form submission
-            alert('Terima kasih! Pesan Anda telah dikirim. Tim kami akan segera menghubungi Anda.');
-
-            // Reset form
-            contactForm.reset();
-        });
-    }
-
-    // Window resize handler untuk map
-    window.addEventListener('resize', function() {
-        if (map) {
+        function updateData() {
+            showLoading();
             setTimeout(() => {
-                map.invalidateSize();
-            }, 100);
+                if (chart) {
+                    chart.update('active');
+                }
+                updateLegend();
+                updateStats();
+                hideLoading();
+            }, 800);
         }
-    });
-});
-        </script>
+
+        // Fungsi untuk mengupdate URL
+        function updateUrl(pageId) {
+            const url = new URL(window.location);
+
+            if (pageId === 'beranda') {
+                // Untuk halaman beranda, hapus semua parameter
+                url.search = '';
+            } else {
+                // Untuk halaman lain, set parameter page
+                url.searchParams.set('page', pageId);
+
+                // Hapus parameter yang tidak relevan untuk halaman selain data-sampah
+                if (pageId !== 'data-sampah') {
+                    url.searchParams.delete('tahun');
+                    url.searchParams.delete('tps');
+                }
+            }
+
+            // Update URL tanpa reload halaman
+            window.history.pushState({}, '', url);
+        }
+
+        // Fungsi untuk mendapatkan parameter URL
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Inisialisasi halaman dan navigasi
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fungsi untuk menampilkan halaman tertentu
+            function showPage(pageId) {
+                // Sembunyikan semua halaman
+                document.querySelectorAll('.page-content').forEach(page => {
+                    page.classList.remove('active');
+                });
+
+                // Tampilkan halaman yang dipilih
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+
+                // Update status aktif di navbar
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+
+                // Inisialisasi komponen berdasarkan halaman yang aktif
+                setTimeout(() => {
+                    if (pageId === 'data-sampah') {
+                        // Inisialisasi chart untuk halaman data-sampah
+                        if (document.getElementById('wasteChart')) {
+                            initChart();
+                            updateLegend();
+                            updateStats();
+                        }
+                    } else if (pageId === 'peta' || pageId === 'lokasi') {
+                        // Inisialisasi map untuk halaman peta/lokasi
+                        if (document.getElementById('map')) {
+                            initMap();
+                        }
+                    }
+                }, 100);
+            }
+
+            // Event listener untuk navigasi
+            document.querySelectorAll('.nav-link[data-page]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Abaikan link login
+                    if (this.getAttribute('href') !== '{{ url('/login') }}') {
+                        e.preventDefault();
+                        const page = this.getAttribute('data-page');
+                        showPage(page);
+                        updateUrl(page);
+                    }
+                });
+            });
+
+            // Cek apakah ada parameter page dari URL
+            const pageParam = getUrlParameter('page');
+            let initialPage = 'beranda'; // default page
+
+            // Jika ada parameter page, gunakan itu
+            if (pageParam && pageParam !== '') {
+                initialPage = pageParam;
+            }
+
+            // Inisialisasi halaman
+            showPage(initialPage);
+        });
+
+        // Contact form functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Get form data
+                    const formData = {
+                        name: document.getElementById('fullName').value,
+                        email: document.getElementById('email').value,
+                        organization: document.getElementById('organization').value,
+                        subject: document.getElementById('subject').value,
+                        message: document.getElementById('message').value
+                    };
+
+                    // Simulate form submission
+                    alert('Terima kasih! Pesan Anda telah dikirim. Tim kami akan segera menghubungi Anda.');
+
+                    // Reset form
+                    contactForm.reset();
+                });
+            }
+
+            // Window resize handler untuk map
+            window.addEventListener('resize', function() {
+                if (map) {
+                    setTimeout(() => {
+                        map.invalidateSize();
+                    }, 100);
+                }
+            });
+        });
+    </script>
 
 
 </body>
+
 </html>

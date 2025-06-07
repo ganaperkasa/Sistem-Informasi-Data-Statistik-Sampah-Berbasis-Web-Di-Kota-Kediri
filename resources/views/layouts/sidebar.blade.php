@@ -95,9 +95,9 @@
 
 
       <!-- Components -->
-      <li class="menu-header small text-uppercase"><span class="menu-header-text">User</span></li>
+      {{-- <li class="menu-header small text-uppercase"><span class="menu-header-text">User</span></li> --}}
       <!-- Cards -->
-      <li class="menu-item">
+      {{-- <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-dock-top"></i>
           <div data-i18n="Account Settings">Account Settings</div>
@@ -119,7 +119,7 @@
             </a>
           </li>
         </ul>
-      </li>
+      </li> --}}
       <!-- User interface -->
 
 

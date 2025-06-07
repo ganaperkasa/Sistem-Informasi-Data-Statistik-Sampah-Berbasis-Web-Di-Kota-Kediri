@@ -15,7 +15,7 @@ class Location extends Model
     ];
     public function tps()
     {
-        return $this->hasOne(Tps::class, 'locations_id');
+        return $this->hasMany(Tps::class, 'locations_id');
     }
 
     public function wasteEntries()

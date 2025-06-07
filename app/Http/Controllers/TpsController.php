@@ -36,6 +36,11 @@ public function update(Request $request, $id)
         'fasilitas'        => 'nullable|string',
         'foto_lokasi'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         'ulasan'           => 'nullable|string',
+    ],  [
+        'foto_lokasi.max' => 'Ukuran foto lokasi tidak boleh lebih dari 2MB.',
+        'foto_lokasi.image' => 'File yang diunggah harus berupa gambar.',
+        'foto_lokasi.mimes' => 'Format gambar harus jpg, jpeg, atau png.',
+        'jam_tutup.after' => 'Jam tutup harus lebih besar dari jam buka.',
     ]);
 
     // Gabungkan jam buka dan tutup menjadi satu string

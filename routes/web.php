@@ -39,7 +39,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/dashboard', fn() => view('coba.dashboard'));
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 
