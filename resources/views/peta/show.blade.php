@@ -2,24 +2,23 @@
 @section('title', 'Peta')
 @section('content')
 
-        <div class="row">
-            <div class="col-md-12 col-lg-12 order-0 mb-4">
-                <div class="card h-1000">
-                    <div class="card-body">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 order-0 mb-4">
+            <div class="card h-1000">
+                <div class="card-body">
 
-                        <div id="map"></div>
-                        <!-- Make sure you put this AFTER Leaflet's CSS -->
-                        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-                            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+                    <div id="map"></div>
+                    <!-- Make sure you put this AFTER Leaflet's CSS -->
+                    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-                    </div>
                 </div>
             </div>
+        </div>
 
 
     </div>
     @push('js')
-
         <script>
             // Inisialisasi peta
             var map = L.map('map').setView([-7.8267704, 112.0197845], 13);
@@ -35,8 +34,7 @@
                 // Tampilkan tooltip (label) secara permanen
 
                 marker.bindTooltip(
-                    "{{ $location->name ?: 'Lokasi Tanpa Nama' }}",
-                    {
+                    "{{ $location->name ?: 'Lokasi Tanpa Nama' }}", {
                         permanent: true,
                         direction: 'top',
                         className: 'my-labels' // Optional: untuk custom styling
@@ -51,14 +49,6 @@
             Latitude: {{ $location->latitude }}<br>
             Longitude: {{ $location->longitude }}
           </div>
-          <div class="text-muted small">
-            @if($location->tps && $location->tps->foto_lokasi)
-                <img src="{{ asset('storage/' . $location->tps->foto_lokasi) }}" class="img-thumbnail" style="width: 80px; height: auto;">
-            @else
-                <span>Tidak ada foto</span>
-            @endif
-          </div>
-
           <div class="mt-1 small">
             <i class="bx bx-calendar"></i> {{ $location->created_at->format('d M Y') }}
           </div>

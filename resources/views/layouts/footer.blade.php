@@ -6,7 +6,7 @@
           document.write(new Date().getFullYear());
         </script>
         , by
-        <a  class="footer-link fw-bolder">ThemeSelection</a>
+        <a  class="footer-link fw-bolder">Angga</a>
       </div>
 
     </div>

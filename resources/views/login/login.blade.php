@@ -290,7 +290,8 @@
 <body>
     <div class="login-container">
         <div class="logo">
-            <div class="logo-circle">🌿</div>
+
+            {{-- <div class="logo-circle">   </div> --}}
             <h1 class="welcome-text">Selamat Datang</h1>
             <p class="subtitle">Masuk ke akun Anda untuk melanjutkan</p>
         </div>

@@ -611,7 +611,7 @@
                     <a href="#" class="nav-link active" data-page="beranda">Beranda</a>
                     <a href="#" class="nav-link" data-page="data-sampah">Data Sampah</a>
                     <a href="#" class="nav-link" data-page="peta">Peta</a>
-                    <a href="#" class="nav-link" data-page="fasilitas">Fasilitas</a>
+                    <a href="#" class="nav-link" data-page="fasilitas">TPS</a>
                     <a href="#" class="nav-link" data-page="kontak">Kontak</a>
                     <a href="{{ url('/login') }}" class="nav-link">Login</a>
                 </div>
@@ -697,30 +697,11 @@
                     <div class="chart-container">
                         <canvas id="wasteChart"></canvas>
                     </div>
-                    <div class="chart-container">
 
-                    </div>
 
                     <div class="legend" id="chartLegend"></div>
 
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-value" id="totalWaste">100%</div>
-                            <div class="stat-label">Total Sampah</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="organicWaste">57.8%</div>
-                            <div class="stat-label">Sampah Organik</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="plasticWaste">17.4%</div>
-                            <div class="stat-label">Sampah Plastik</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="paperWaste">10.7%</div>
-                            <div class="stat-label">Sampah Kertas</div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
 
@@ -747,10 +728,10 @@
 
             <!-- Halaman Fasilitas -->
             <div id="fasilitas" class="page-content">
-                <h1 class="page-title">Fasilitas Pengelolaan Sampah</h1>
+                <h1 class="page-title">Tempat Pembuangan Sampah</h1>
 
                 <div class="content-section">
-                    <h2 class="section-title">Jenis Fasilitas</h2>
+                    <h2 class="section-title">TPS Kota kediri</h2>
                     <div class="facility-grid">
                         @foreach ($spt as $tp)
                             <div class="facility-card">
@@ -773,31 +754,8 @@
                             </div>
                         @endforeach
                     </div>
-
-
                 </div>
 
-                <div class="content-section">
-                    <h2 class="section-title">Statistik Fasilitas</h2>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-value">1,247</div>
-                            <div class="stat-label">Total TPA/TPS</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">8,935</div>
-                            <div class="stat-label">Bank Sampah</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">156</div>
-                            <div class="stat-label">Fasilitas Pengolahan</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">89</div>
-                            <div class="stat-label">TPST Regional</div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- Halaman Kontak -->
@@ -809,15 +767,13 @@
                     <div class="info-grid">
                         <div class="info-card">
                             <div class="info-title">Alamat Kantor</div>
-                            <p>Kementerian Lingkungan Hidup dan Kehutanan<br>
-                                Gedung Manggala Wanabakti Blok VII Lantai 6<br>
-                                Jl. Gatot Subroto, Jakarta Pusat 10270</p>
+                            <p>Jl. Mayor Bismo no 4, Kel. Semampir Kec. Kota, Mojoroto, Kec. Mojoroto, Kota Kediri, Jawa Timur 64129</p>
                         </div>
                         <div class="info-card">
                             <div class="info-title">Kontak</div>
-                            <p><strong>Telepon:</strong> (021) 5720227<br>
-                                <strong>Email:</strong> info@sipsn.menlhk.go.id<br>
-                                <strong>Website:</strong> www.sipsn.menlhk.go.id
+                            <p><strong>Telepon:</strong> (0354) 682336<br>
+                                <strong>Email:</strong> dkp@dkp.kedirikota.go.id<br>
+                                <strong>Website:</strong> dlhkp.kedirikota.go.id
                             </p>
                         </div>
                         <div class="info-card">
@@ -830,7 +786,7 @@
                     </div>
                 </div>
 
-                <div class="contact-form">
+                {{-- <div class="contact-form">
                     <h2 class="section-title">Kirim Pesan</h2>
                     <form id="contactForm">
                         <div class="form-group">
@@ -855,7 +811,7 @@
                         </div>
                         <button type="submit" class="form-button">Kirim Pesan</button>
                     </form>
-                </div>
+                </div> --}}
             </div>
         </main>
     </div>
@@ -941,14 +897,33 @@
             <div class="p-2">
                 <h5>{{ $location->name ?: 'Lokasi Tanpa Nama' }}</h5>
                 <div class="text-muted small">
-                    @foreach ($location->tps as $tps )
+
+                    @forelse ($location->tps as $tps )
 
                     Jumlah Pekerja: {{ $tps->jumlah_pekerja }}<br>
-                    Sampah Masuk (kg): {{ $tps->sampah_masuk }}<br>
                     Luas (m²): {{ $tps->luas }}<br>
-                    Resuksi Sampah:
+                    @empty
+                    Jumlah Pekerja: Data tidak tersedia<br>
+                    Luas (m²): Data tidak tersedia<br>
+                    @endforelse
+                    @php
+            $masuk = $latestMasuk->get($location->id);
+        @endphp
 
-                    @endforeach
+        @if ($masuk)
+            Sampah Masuk (kg): {{ $masuk->amount_kg }} /hari<br>
+@else
+            Sampah Masuk (kg): Data tidak tersedia<br>
+        @endif
+@php
+            $reduksi = $latestReduksi->get($location->id);
+        @endphp
+        @if ($reduksi)
+            Resuksi Sampah: {{ $reduksi->persentase_reduksi }}% /bulan<br>
+        @else
+            Resuksi Sampah: Data tidak tersedia<br>
+
+        @endif
                 </div>
             </div>
         `);

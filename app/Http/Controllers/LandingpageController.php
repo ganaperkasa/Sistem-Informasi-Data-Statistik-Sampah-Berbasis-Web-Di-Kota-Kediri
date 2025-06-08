@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WasteEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ReduksiSampah;
@@ -32,11 +33,29 @@ class LandingpageController extends Controller
         // Ambil lokasi lengkap beserta relasi tps (pakai model)
         $locations = Location::with('tps')->get();
         $tps = Tps::with('location')->get();
+        $masuk = WasteEntry::with('location')->get();
+        $latestMasukPerLocation = $masuk
+    ->sortByDesc('updated_at')
+    ->groupBy('location_id')
+    ->map(function ($group) {
+        return $group->first(); // ambil satu data terbaru per lokasi
+    });
+
+    $reduksi = ReduksiSampah::with('location')->get();
+    $latestreduksi = $reduksi ->sortByDesc('updated_at')
+    ->groupBy('location_id')
+    ->map(function ( $group) {
+        return $group->first(); // ambil satu data terbaru per lokasi
+    });
+        $tps = Tps::with('location')->get();
         return view('landingpage', [
             'tahun' => $tahun,
             'reduksiData' => $reduksiData,
             'tps' => $tpsName,
             'spt' => $tps,
+            'latestMasuk' => $latestMasukPerLocation,
+            'latestReduksi' => $latestreduksi,
+            'reduksi' => $reduksi,
             'locations' => $locations,
         ]);
     }
