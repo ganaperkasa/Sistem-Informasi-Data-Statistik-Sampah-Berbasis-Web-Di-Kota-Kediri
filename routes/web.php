@@ -57,6 +57,7 @@ Route::post('/locations', [LocationController::class, 'store'])->name('locations
 
 Route::get('/data-tps', [TpsController::class, 'index'])->name('tps.index');
 Route::get('/tps/edit/{id}', [TpsController::class, 'edit'])->name('tps.edit');
+Route::get('/tps/export', [TpsController::class, 'export'])->name('tps.export');
 Route::post('/tps/store', [TpsController::class, 'store'])->name('tps.store');
 Route::put('/tps/update/{id}', [TpsController::class, 'update'])->name('tps.update');
 Route::delete('/tps/delete/{id}', [TpsController::class, 'destroy'])->name('tps.destroy');

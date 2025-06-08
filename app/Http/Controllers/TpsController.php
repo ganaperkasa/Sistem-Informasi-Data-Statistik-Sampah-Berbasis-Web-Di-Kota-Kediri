@@ -8,6 +8,8 @@ use App\Models\Tps;
 use App\Models\WasteEntry;
 use App\Models\WasteOutflow;
 use App\Models\ReduksiSampah;
+use App\Exports\TpsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 use Illuminate\Support\Str;
 
@@ -66,6 +68,10 @@ class TpsController extends Controller
         $tps->update($validated);
 
         return redirect()->route('tps.index')->with('success', 'Data TPS berhasil diperbarui.');
+    }
+    public function export()
+    {
+        return Excel::download(new TpsExport, 'data_tps.xlsx');
     }
 
     public function destroy($id)

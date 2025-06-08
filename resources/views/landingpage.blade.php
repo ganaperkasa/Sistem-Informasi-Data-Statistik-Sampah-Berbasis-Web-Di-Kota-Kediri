@@ -1150,12 +1150,12 @@
                     // Simulate form submission
                     alert('Terima kasih! Pesan Anda telah dikirim. Tim kami akan segera menghubungi Anda.');
 
-                    // Reset form
+                   
                     contactForm.reset();
                 });
             }
 
-            // Window resize handler untuk map
+
             window.addEventListener('resize', function() {
                 if (map) {
                     setTimeout(() => {

@@ -12,7 +12,13 @@
 
 
     <div class="card">
-        <h5 class="card-header">Daftar TPS</h5>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Daftar TPS</h5>
+            <a href="{{ route('tps.export') }}" class="btn btn-success mb-3">
+                <i class="fas fa-file-excel me-1"></i> Export Excel
+            </a>
+        </div>
+
         <div class="table-responsive text-nowrap">
             <table class="table table-striped">
                 <thead>
