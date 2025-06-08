@@ -35,8 +35,8 @@
                             <td>{{ $tp->jumlah_pekerja }}</td>
                             <td>{{ $tp->luas }}</td>
                             <td>
-                                <a href="{{ route('tps.edit', $tp->id) }}" class="btn btn-outline-primary ">Lengkapi</a>
-                                <button type="button" class="btn btn-outline-info " data-bs-toggle="modal"
+                                <a href="{{ route('tps.edit', $tp->id) }}" class="btn rounded-pill btn-outline-primary ">Lengkapi</a>
+                                <button type="button" class="btn rounded-pill btn-outline-info " data-bs-toggle="modal"
                                     data-bs-target="#modalDetail{{ $tp->id }}">
                                     Detail
                                 </button>
@@ -44,7 +44,7 @@
                                     style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger"
+                                    <button type="submit" class="btn rounded-pill btn-outline-danger"
                                         onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
                                 </form>
                             </td>

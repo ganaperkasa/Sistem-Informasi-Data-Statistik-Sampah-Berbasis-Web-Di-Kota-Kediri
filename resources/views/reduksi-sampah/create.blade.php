@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Tambah Reduksi Sampah')
 @section('content')
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Horizontal Layouts</h4>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Reduksi Sampah/</span> Hitung Reduksi Sampah</h4>
 
               <!-- Basic Layout & Basic with Icons -->
               <div class="row">
@@ -10,7 +10,6 @@
                   <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between">
                       <h5 class="mb-0">Hitung Reduksi Sampah</h5>
-                      <small class="text-muted float-end">Default label</small>
                     </div>
                     <div class="card-body">
                       <form action="{{ route('reduksi_sampah.calculate') }}" method="POST">
@@ -29,7 +28,8 @@
                             <label for="tanggal" class="form-label">Tanggal</label>
                             <input type="date" name="tanggal" id="tanggal" class="form-control" value="{{ date('Y-m-d') }}" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Hitung Reduksi</button>
+                        <button type="submit" class="btn rounded-pill btn-primary">Hitung Reduksi</button>
+                        <a href="{{ route('reduksi_sampah.index') }}"  class="btn rounded-pill btn-danger">Batal</a>
                     </form>
 
                     </div>

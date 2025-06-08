@@ -111,8 +111,8 @@
                         {{-- Submit --}}
                         <div class="row justify-content-end">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="{{ route('tps.index') }}" class="btn btn-danger">Batal</a>
+                                <button type="submit" class="btn rounded-pill btn-primary">Update</button>
+                                <a href="{{ route('tps.index') }}" class="btn rounded-pill btn-danger">Batal</a>
                             </div>
                         </div>
                     </form>
