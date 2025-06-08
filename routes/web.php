@@ -56,11 +56,10 @@ Route::get('/maps-tps', [LocationController::class, 'index'])->name('maps.index'
 Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
 
 Route::get('/data-tps', [TpsController::class, 'index'])->name('tps.index');
-//route edit tps
 Route::get('/tps/edit/{id}', [TpsController::class, 'edit'])->name('tps.edit');
-//route store tps
 Route::post('/tps/store', [TpsController::class, 'store'])->name('tps.store');
 Route::put('/tps/update/{id}', [TpsController::class, 'update'])->name('tps.update');
+Route::delete('/tps/delete/{id}', [TpsController::class, 'destroy'])->name('tps.destroy');
 
 //route index reduksisampah
 Route::get('/reduksi-sampah', [ReduksiSampahController::class, 'index'])->name('reduksi_sampah.index');

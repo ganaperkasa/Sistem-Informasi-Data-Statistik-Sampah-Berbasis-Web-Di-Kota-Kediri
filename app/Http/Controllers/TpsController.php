@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Location; // Pastikan model Location sudah dibuat
-use App\Models\Tps; // Pastikan model Tps sudah dibuat
+use App\Models\Location;
+use App\Models\Tps;
+use App\Models\WasteEntry;
+use App\Models\WasteOutflow;
+use App\Models\ReduksiSampah;
+
 use Illuminate\Support\Str;
 
 class TpsController extends Controller
@@ -19,68 +23,63 @@ class TpsController extends Controller
     }
 
     public function edit($id)
-{
-    $tps = Tps::with('location')->findOrFail($id); // Tambahkan with()
+    {
+        $tps = Tps::with('location')->findOrFail($id); // Tambahkan with()
 
-    return view('tps.edit', compact('tps', ));
-}
-public function update(Request $request, $id)
-{
-    // Validasi input untuk tabel TPS
-    $validated = $request->validate([
-        'jumlah_pekerja'   => 'nullable|integer|min:0',
-        'luas'             => 'nullable|numeric|min:0',
-        'jam_buka'         => 'nullable|date_format:H:i',
-        'jam_tutup'        => 'nullable|date_format:H:i|after:jam_buka',
-        'kapasitas_tps'    => 'nullable|integer|min:0',
-        'fasilitas'        => 'nullable|string',
-        'foto_lokasi'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        'ulasan'           => 'nullable|string',
-    ],  [
-        'foto_lokasi.max' => 'Ukuran foto lokasi tidak boleh lebih dari 2MB.',
-        'foto_lokasi.image' => 'File yang diunggah harus berupa gambar.',
-        'foto_lokasi.mimes' => 'Format gambar harus jpg, jpeg, atau png.',
-        'jam_tutup.after' => 'Jam tutup harus lebih besar dari jam buka.',
-    ]);
+        return view('tps.edit', compact('tps'));
+    }
+    public function update(Request $request, $id)
+    {
 
-    // Gabungkan jam buka dan tutup menjadi satu string
-    $validated['jam_operasional'] = $validated['jam_buka'] && $validated['jam_tutup']
-        ? $validated['jam_buka'] . ' - ' . $validated['jam_tutup']
-        : null;
+        $validated = $request->validate(
+            [
+                'jumlah_pekerja' => 'nullable|integer|min:0',
+                'luas' => 'nullable|numeric|min:0',
+                'jam_buka' => 'nullable|date_format:H:i',
+                'jam_tutup' => 'nullable|date_format:H:i|after:jam_buka',
+                'kapasitas_tps' => 'nullable|integer|min:0',
+                'fasilitas' => 'nullable|string',
+                'foto_lokasi' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+                'ulasan' => 'nullable|string',
+            ],
+            [
+                'foto_lokasi.max' => 'Ukuran foto lokasi tidak boleh lebih dari 2MB.',
+                'foto_lokasi.image' => 'File yang diunggah harus berupa gambar.',
+                'foto_lokasi.mimes' => 'Format gambar harus jpg, jpeg, atau png.',
+                'jam_tutup.after' => 'Jam tutup harus lebih besar dari jam buka.',
+            ],
+        );
 
-    // Hapus jam_buka dan jam_tutup agar tidak masuk ke mass assignment
-    unset($validated['jam_buka'], $validated['jam_tutup']);
+        $validated['jam_operasional'] = $validated['jam_buka'] && $validated['jam_tutup'] ? $validated['jam_buka'] . ' - ' . $validated['jam_tutup'] : null;
 
-    // Cari TPS berdasarkan ID
-    $tps = Tps::findOrFail($id);
+        unset($validated['jam_buka'], $validated['jam_tutup']);
 
-    // Jika ada file gambar, simpan dan update path-nya
+        $tps = Tps::findOrFail($id);
 
+        if ($request->hasFile('foto_lokasi')) {
+            $file = $request->file('foto_lokasi');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $fotoPath = $file->storeAs('tps_images', $filename, 'public');
+            $validated['foto_lokasi'] = $fotoPath;
+        }
 
-if ($request->hasFile('foto_lokasi')) {
-    $file = $request->file('foto_lokasi');
-    $filename = time() . '_' . $file->getClientOriginalName();
-    $fotoPath = $file->storeAs('tps_images', $filename, 'public');
-    $validated['foto_lokasi'] = $fotoPath;
-}
+        $tps->update($validated);
 
-
-    // Update data TPS
-    $tps->update($validated);
-
-    return redirect()->route('tps.index')->with('success', 'Data TPS berhasil diperbarui.');
-}
-
+        return redirect()->route('tps.index')->with('success', 'Data TPS berhasil diperbarui.');
+    }
 
     public function destroy($id)
     {
-        // Mencari TPS berdasarkan ID
         $tps = Tps::findOrFail($id);
+        $location = $tps->location;
 
-        // Menghapus TPS
-        $tps->delete();
+        Tps::where('locations_id', $location->id)->delete();
+        WasteEntry::where('location_id', $location->id)->delete();
+        WasteOutflow::where('location_id', $location->id)->delete();
+        ReduksiSampah::where('location_id', $location->id)->delete();
 
-        // Redirect atau mengembalikan response sesuai kebutuhan
-        return redirect()->route('tps.index')->with('success', 'TPS berhasil dihapus');
+        $location->delete();
+
+        return redirect()->back()->with('success', 'Data lokasi dan semua relasinya berhasil dihapus.');
     }
 }

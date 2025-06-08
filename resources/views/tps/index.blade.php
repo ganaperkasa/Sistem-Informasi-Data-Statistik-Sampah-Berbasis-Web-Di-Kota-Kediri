@@ -40,6 +40,13 @@
                                     data-bs-target="#modalDetail{{ $tp->id }}">
                                     Detail
                                 </button>
+                                <form action="{{ route('tps.destroy', $tp->id) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-danger"
+                                        onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                                </form>
                             </td>
                         </tr>
 
