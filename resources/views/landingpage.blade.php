@@ -931,7 +931,7 @@
 
                 // Jika ada lokasi, set view ke lokasi pertama
                 @if ($locations->isNotEmpty())
-                    map.setView([{{ $locations[5]->latitude }}, {{ $locations[5]->longitude }}], 13);
+                    map.setView([{{ $locations[2]->latitude }}, {{ $locations[2]->longitude }}], 13);
                 @endif
 
                 // Refresh ukuran map setelah container terlihat
