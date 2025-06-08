@@ -320,13 +320,13 @@
         </form>
 
 
-        <div class="divider">
+        {{-- <div class="divider">
             <span>atau</span>
         </div>
 
         <div class="signup-link">
             Belum punya akun? <a href="#" onclick="showAlert('Halaman daftar')">Daftar sekarang</a>
-        </div>
+        </div> --}}
     </div>
 
     <script>
