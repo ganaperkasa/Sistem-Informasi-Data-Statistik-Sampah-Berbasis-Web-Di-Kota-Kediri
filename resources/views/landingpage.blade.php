@@ -67,7 +67,6 @@
             padding: 20px 30px;
             margin-bottom: 30px;
             box-shadow: 0 4px 20px rgba(46, 125, 50, 0.1);
-            border-left: 4px solid #4caf50;
         }
 
         .nav {
@@ -175,29 +174,47 @@
         }
 
         .hero-section {
-            text-align: center;
-            padding: 40px 0;
-            background: linear-gradient(135deg, #f1f8e9, #e8f5e8);
-            border-radius: 12px;
-            margin-bottom: 30px;
-        }
+    text-align: center;
+    padding: 100px 0;
+    background: url('{{ asset('assets/img/bg.jpg') }}') no-repeat center center;
+    background-size: cover;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    color: white; /* opsional: agar teks lebih terbaca di atas gambar */
+    position: relative;
+}
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 255, 255, 0.821); /* lapisan gelap */
+    border-radius: 12px;
+    z-index: 6;
+}
+.hero-section h1,
+.hero-section p {
+    position: relative;
+    z-index: 20;
+}
+
 
         .hero-title {
             font-size: 32px;
             font-weight: bold;
-            color: #2e7d32;
+            color: #0e6934;
             margin-bottom: 15px;
         }
 
         .hero-subtitle {
             font-size: 18px;
-            color: #4caf50;
+            font-weight: bold;
+            color: #0e6934;
             margin-bottom: 20px;
         }
 
         .hero-description {
             font-size: 16px;
-            color: #666;
+            color: #000000;
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
@@ -628,6 +645,7 @@
                         seluruh kota kediri. Berkomitmen untuk Indonesia yang lebih bersih dan berkelanjutan melalui
                         pengelolaan sampah yang efektif.</p>
                 </div>
+
 
                 <div class="features-grid">
                     <div class="feature-card">
@@ -1150,7 +1168,7 @@
                     // Simulate form submission
                     alert('Terima kasih! Pesan Anda telah dikirim. Tim kami akan segera menghubungi Anda.');
 
-                   
+
                     contactForm.reset();
                 });
             }
