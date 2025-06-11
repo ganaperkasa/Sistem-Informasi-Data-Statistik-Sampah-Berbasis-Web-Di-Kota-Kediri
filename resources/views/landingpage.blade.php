@@ -174,28 +174,33 @@
         }
 
         .hero-section {
-    text-align: center;
-    padding: 100px 0;
-    background: url('{{ asset('assets/img/bg.jpg') }}') no-repeat center center;
-    background-size: cover;
-    border-radius: 12px;
-    margin-bottom: 30px;
-    color: white; /* opsional: agar teks lebih terbaca di atas gambar */
-    position: relative;
-}
-.hero-section::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(255, 255, 255, 0.821); /* lapisan gelap */
-    border-radius: 12px;
-    z-index: 6;
-}
-.hero-section h1,
-.hero-section p {
-    position: relative;
-    z-index: 20;
-}
+            text-align: center;
+            padding: 100px 0;
+            background: url('{{ asset('assets/img/bg.jpg') }}') no-repeat center center;
+            background-size: cover;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            color: white;
+            position: relative;
+        }
+
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.821);
+            border-radius: 12px;
+            z-index: 6;
+        }
+
+        .hero-section h1,
+        .hero-section p {
+            position: relative;
+            z-index: 20;
+        }
 
 
         .hero-title {
@@ -785,7 +790,8 @@
                     <div class="info-grid">
                         <div class="info-card">
                             <div class="info-title">Alamat Kantor</div>
-                            <p>Jl. Mayor Bismo no 4, Kel. Semampir Kec. Kota, Mojoroto, Kec. Mojoroto, Kota Kediri, Jawa Timur 64129</p>
+                            <p>Jl. Mayor Bismo no 4, Kel. Semampir Kec. Kota, Mojoroto, Kec. Mojoroto, Kota Kediri, Jawa
+                                Timur 64129</p>
                         </div>
                         <div class="info-card">
                             <div class="info-title">Kontak</div>
@@ -925,8 +931,8 @@
                     Luas (m²): Data tidak tersedia<br>
                     @endforelse
                     @php
-            $masuk = $latestMasuk->get($location->id);
-        @endphp
+                        $masuk = $latestMasuk->get($location->id);
+                    @endphp
 
         @if ($masuk)
             Sampah Masuk (kg): {{ $masuk->amount_kg }} /hari<br>
@@ -934,8 +940,8 @@
             Sampah Masuk (kg): Data tidak tersedia<br>
         @endif
 @php
-            $reduksi = $latestReduksi->get($location->id);
-        @endphp
+    $reduksi = $latestReduksi->get($location->id);
+@endphp
         @if ($reduksi)
             Resuksi Sampah: {{ $reduksi->persentase_reduksi }}% /bulan<br>
         @else
