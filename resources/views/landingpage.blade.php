@@ -233,6 +233,10 @@
         }
 
         .feature-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
             background: white;
             padding: 25px;
             border-radius: 12px;
@@ -268,6 +272,16 @@
         .feature-description {
             color: #666;
             line-height: 1.5;
+            margin-bottom: 10px;
+            flex-grow: 1;
+        }
+
+        .spacer {
+            flex-grow: 1;
+        }
+
+        .blog-entry-readmore {
+            margin-top: auto;
         }
 
         .content-section {
@@ -592,6 +606,24 @@
             }
         }
 
+        .read-more-link {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-top: 10px;
+            background-color: #2e7d32;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .read-more-link:hover {
+            background-color: #2e7d32;
+            text-decoration: none;
+        }
+
+
         .loading {
             display: none;
             text-align: center;
@@ -649,168 +681,183 @@
                     <p class="hero-description">Platform terintegrasi untuk monitoring dan pengelolaan data sampah di
                         seluruh kota kediri. Berkomitmen untuk Indonesia yang lebih bersih dan berkelanjutan melalui
                         pengelolaan sampah yang efektif.</p>
+
                 </div>
 
-
+                <h2 class="section-title">Berita</h2>
                 <div class="features-grid">
                     <div class="feature-card">
-                        <div class="feature-icon">📊</div>
-                        <h3 class="feature-title">Data Komprehensif</h3>
-                        <p class="feature-description">Akses data lengkap komposisi sampah dari berbagai daerah di
-                            Indonesia dengan visualisasi yang mudah dipahami.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📋</div>
-                        <h3 class="feature-title">Regulasi Terkini</h3>
-                        <p class="feature-description">Informasi terbaru mengenai peraturan dan kebijakan pengelolaan
-                            sampah nasional dan daerah.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🏭</div>
-                        <h3 class="feature-title">Peta Fasilitas</h3>
-                        <p class="feature-description">Lokasi dan informasi fasilitas pengelolaan sampah seperti TPA,
-                            TPS, dan bank sampah di seluruh Indonesia.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🤝</div>
-                        <h3 class="feature-title">Kolaborasi</h3>
-                        <p class="feature-description">Platform untuk berkolaborasi dengan stakeholder dalam upaya
-                            pengelolaan sampah yang lebih baik.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Halaman Data Sampah -->
-            <div id="data-sampah" class="page-content">
-                <h1 class="page-title">Reduksi Sampah</h1>
-
-                <div class="controls">
-                    <div class="control-group">
-                        <label class="control-label">Tahun</label>
-                        <select class="control-select" id="yearSelect" onchange="applyFilters()">
-                            <option value="2025" {{ $tahun == 2025 ? 'selected' : '' }}>2025</option>
-                            <option value="2024" {{ $tahun == 2024 ? 'selected' : '' }}>2024</option>
-                            <option value="2023" {{ $tahun == 2023 ? 'selected' : '' }}>2023</option>
-                        </select>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">TPS</label>
-                        <select class="control-select" id="tpsSelect" onchange="applyFilters()">
-                            <option value="">Semua TPS</option>
-                            @foreach ($locations as $location)
-                                <option value="{{ $location->name }}" {{ $tps == $location->name ? 'selected' : '' }}>
-                                    {{ $location->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <div class="loading" id="loading">
-                    <div class="spinner"></div>
-                    <p>Memuat data...</p>
-                </div>
-
-                <div class="chart-section">
-                    <h2 class="chart-title">Reduksi Sampah Berdasarkan TPS</h2>
-
-                    {{-- <div class="chart-container">
-                        <canvas id="wasteChart"></canvas>
-                    </div> --}}
-                    <div class="chart-container">
-                        <canvas id="wasteChart"></canvas>
-                    </div>
-
-
-                    <div class="legend" id="chartLegend"></div>
-
-
-                </div>
-            </div>
-
-            <!-- Halaman Regulasi -->
-            <div id="peta" class="page-content">
-                <h1 class="page-title">Peta Tempat Pembuangan Sampah</h1>
-
-                <div class="content-section">
-                    <h2 class="section-title">Tempat Pembuangan Sampah</h2>
-                    <ul class="regulation-list">
-                        <div class="card-body">
-
-                            <div id="map"></div>
-                            <!-- Make sure you put this AFTER Leaflet's CSS -->
-                            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-                                integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+                        <h3 class="feature-title">Zero Waste Bukan Sekadar Tren, Ini Bukti Nyata Perubahannya!</h3>
+                        <p class="feature-description">Semangat kebersamaan dan penghormatan, bersatu untuk masa depan
+                            yang lebih baik! Mbak Wali Kota Kediri, Vinanda Prameswati, menyerukan pentingnya memilah
+                            sampah sejak dari rumah. Sampah rumah tangga masih mendominasi timbulan…</p>
+                        <div class="spacer"></div>
+                        <div class="blog-entry-readmore clr">
+                            <a class="read-more-link"
+                                href="https://dlhkp.kedirikota.go.id/2025/06/08/zero-waste-bukan-sekadar-tren-ini-bukti-nyata-perubahannya/">
+                                Baca Selengkapnya <i class="fa fa-angle-right" aria-hidden="true" role="img"></i>
+                            </a>
                         </div>
+                    </div>
 
-                    </ul>
+                    <div class="feature-card">
+                        <h3 class="feature-title">10.000 Pohon, 1 Kota, 1 Misi: Tanam Harapan dari Goa Selomangleng!
+                        </h3>
+                        <p class="feature-description">Apel bareng 350 peserta - Lintas komunitas, lintas generasi!
+                            Dalam rangka memperingati Hari Bumi, Pemkot Kediri bersama DLHKP menggelar aksi spektakuler
+                            nan bermakna. Sebanyak 10.000 pohon ditanam serentak di seluruh…</p>
+                        <div class="spacer"></div>
+                        <div class="blog-entry-readmore clr">
+                            <a class="read-more-link"
+                                href="https://dlhkp.kedirikota.go.id/2025/04/22/10-000-pohon-1-kota-1-misi-tanam-harapan-dari-goa-selomangleng/">
+                                Baca Selengkapnya <i class="fa fa-angle-right" aria-hidden="true" role="img"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 class="feature-title">Serbu Ulat Bulu! Operasi Gabungan DLHKP dan Tim Hebat Cegah Wabah di
+                            Jalur Hijau Kota Kediri</h3>
+                        <p class="feature-description">Aksi bareng 4 dinas! Ulat bulu disemprot habis demi kenyamanan
+                            jalur hijau. Dinas Lingkungan Hidup Kebersihan dan Pertamanan (DLHKP) Kota Kediri kembali
+                            menunjukkan aksi sigapnya di lapangan. Kali ini, mereka…</p>
+                        <div class="spacer"></div>
+                        <div class="blog-entry-readmore clr">
+                            <a class="read-more-link"
+                                href="https://dlhkp.kedirikota.go.id/2025/04/14/serbu-ulat-bulu-operasi-gabungan-dlhkp-dan-tim-hebat-cegah-wabah-di-jalur-hijau-kota-kediri/">
+                                Baca Selengkapnya <i class="fa fa-angle-right" aria-hidden="true" role="img"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
 
-            </div>
+                <!-- Halaman Data Sampah -->
+                <div id="data-sampah" class="page-content">
+                    <h1 class="page-title">Reduksi Sampah</h1>
 
-            <!-- Halaman Fasilitas -->
-            <div id="fasilitas" class="page-content">
-                <h1 class="page-title">Tempat Pembuangan Sampah</h1>
+                    <div class="controls">
+                        <div class="control-group">
+                            <label class="control-label">Tahun</label>
+                            <select class="control-select" id="yearSelect" onchange="applyFilters()">
+                                <option value="2025" {{ $tahun == 2025 ? 'selected' : '' }}>2025</option>
+                                <option value="2024" {{ $tahun == 2024 ? 'selected' : '' }}>2024</option>
+                                <option value="2023" {{ $tahun == 2023 ? 'selected' : '' }}>2023</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">TPS</label>
+                            <select class="control-select" id="tpsSelect" onchange="applyFilters()">
+                                <option value="">Semua TPS</option>
+                                @foreach ($locations as $location)
+                                    <option value="{{ $location->name }}"
+                                        {{ $tps == $location->name ? 'selected' : '' }}>
+                                        {{ $location->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
 
-                <div class="content-section">
-                    <h2 class="section-title">TPS Kota kediri</h2>
-                    <div class="facility-grid">
-                        @foreach ($spt as $tp)
-                            <div class="facility-card">
-                                <h3 class="facility-name">{{ $tp->location->name }}</h3>
-                                <span class="facility-type">Tempat Pengumpulan Sampah</span>
-                                <div class="facility-info">
-                                    <p><strong>Jam Operasional:</strong> {{ $tp->jam_operasional }}</p>
-                                    <p><strong>Kapasitas:</strong> {{ $tp->kapasitas_tps }} ton/hari</p>
-                                    <p><strong>Fasilitas:</strong> {{ $tp->fasilitas }}</p>
-                                    <p><strong>Foto Lokasi:</strong> </p>
-                                </div>
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <p>Memuat data...</p>
+                    </div>
 
-                                @if ($tp->foto_lokasi)
-                                    <div class="facility-image">
-                                        <img src="{{ asset('storage/' . $tp->foto_lokasi) }}"
-                                            class="img-thumbnail facility-img">
-                                    </div>
-                                @endif
+                    <div class="chart-section">
+                        <h2 class="chart-title">Reduksi Sampah Berdasarkan TPS</h2>
 
+                        <div class="chart-container">
+                            <canvas id="wasteChart"></canvas>
+                        </div>
+                        <div class="legend" id="chartLegend"></div>
+                    </div>
+                </div>
+
+                <!-- Halaman Regulasi -->
+                <div id="peta" class="page-content">
+                    <h1 class="page-title">Peta Tempat Pembuangan Sampah</h1>
+
+                    <div class="content-section">
+                        <h2 class="section-title">Tempat Pembuangan Sampah</h2>
+                        <ul class="regulation-list">
+                            <div class="card-body">
+
+                                <div id="map"></div>
+                                <!-- Make sure you put this AFTER Leaflet's CSS -->
+                                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                                    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
                             </div>
-                        @endforeach
+
+                        </ul>
                     </div>
+
+
                 </div>
 
-            </div>
+                <!-- Halaman Fasilitas -->
+                <div id="fasilitas" class="page-content">
+                    <h1 class="page-title">Tempat Pembuangan Sampah</h1>
 
-            <!-- Halaman Kontak -->
-            <div id="kontak" class="page-content">
-                <h1 class="page-title">Hubungi Kami</h1>
+                    <div class="content-section">
+                        <h2 class="section-title">TPS Kota kediri</h2>
+                        <div class="facility-grid">
+                            @foreach ($spt as $tp)
+                                <div class="facility-card">
+                                    <h3 class="facility-name">{{ $tp->location->name }}</h3>
+                                    <span class="facility-type">Tempat Pengumpulan Sampah</span>
+                                    <div class="facility-info">
+                                        <p><strong>Jam Operasional:</strong> {{ $tp->jam_operasional }}</p>
+                                        <p><strong>Kapasitas:</strong> {{ $tp->kapasitas_tps }} ton/hari</p>
+                                        <p><strong>Fasilitas:</strong> {{ $tp->fasilitas }}</p>
+                                        <p><strong>Foto Lokasi:</strong> </p>
+                                    </div>
 
-                <div class="content-section">
-                    <h2 class="section-title">Informasi Kontak</h2>
-                    <div class="info-grid">
-                        <div class="info-card">
-                            <div class="info-title">Alamat Kantor</div>
-                            <p>Jl. Mayor Bismo no 4, Kel. Semampir Kec. Kota, Mojoroto, Kec. Mojoroto, Kota Kediri, Jawa
-                                Timur 64129</p>
-                        </div>
-                        <div class="info-card">
-                            <div class="info-title">Kontak</div>
-                            <p><strong>Telepon:</strong> (0354) 682336<br>
-                                <strong>Email:</strong> dkp@dkp.kedirikota.go.id<br>
-                                <strong>Website:</strong> dlhkp.kedirikota.go.id
-                            </p>
-                        </div>
-                        <div class="info-card">
-                            <div class="info-title">Jam Operasional</div>
-                            <p><strong>Senin - Jumat:</strong> 08:00 - 16:00 WIB<br>
-                                <strong>Sabtu - Minggu:</strong> Tutup<br>
-                                <strong>Layanan Online:</strong> 24/7
-                            </p>
+                                    @if ($tp->foto_lokasi)
+                                        <div class="facility-image">
+                                            <img src="{{ asset('storage/' . $tp->foto_lokasi) }}"
+                                                class="img-thumbnail facility-img">
+                                        </div>
+                                    @endif
+
+                                </div>
+                            @endforeach
                         </div>
                     </div>
+
                 </div>
 
-                {{-- <div class="contact-form">
+                <!-- Halaman Kontak -->
+                <div id="kontak" class="page-content">
+                    <h1 class="page-title">Hubungi Kami</h1>
+
+                    <div class="content-section">
+                        <h2 class="section-title">Informasi Kontak</h2>
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <div class="info-title">Alamat Kantor</div>
+                                <p>Jl. Mayor Bismo no 4, Kel. Semampir Kec. Kota, Mojoroto, Kec. Mojoroto, Kota Kediri,
+                                    Jawa
+                                    Timur 64129</p>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-title">Kontak</div>
+                                <p><strong>Telepon:</strong> (0354) 682336<br>
+                                    <strong>Email:</strong> dkp@dkp.kedirikota.go.id<br>
+                                    <strong>Website:</strong> dlhkp.kedirikota.go.id
+                                </p>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-title">Jam Operasional</div>
+                                <p><strong>Senin - Jumat:</strong> 08:00 - 16:00 WIB<br>
+                                    <strong>Sabtu - Minggu:</strong> Tutup<br>
+                                    <strong>Layanan Online:</strong> 24/7
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="contact-form">
                     <h2 class="section-title">Kirim Pesan</h2>
                     <form id="contactForm">
                         <div class="form-group">
@@ -836,7 +883,7 @@
                         <button type="submit" class="form-button">Kirim Pesan</button>
                     </form>
                 </div> --}}
-            </div>
+                </div>
         </main>
     </div>
 
